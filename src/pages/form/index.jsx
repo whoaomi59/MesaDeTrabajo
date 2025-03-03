@@ -133,7 +133,7 @@ export default function Formulario() {
               className="bg-gray-100 w-full text-gray-800 text-sm px-4 py-3 rounded focus:bg-transparent outline-blue-500 transition-all"
             >
               <option value="">Seleccionar...</option>
-              <option value="SENA-CENTRO">Sena Centro</option>
+              <option value="SENA-CENTRO">SENA Centro</option>
               <option value="YAMBORO">Yamboro</option>
             </select>
           </div>
