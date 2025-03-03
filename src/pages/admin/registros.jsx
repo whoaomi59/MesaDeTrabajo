@@ -11,7 +11,7 @@ export default function Registros() {
     const Get = async () => {
       try {
         const response = await axios.get(
-          `http://localhost/Api_MesaServicio/getSolicitudes.php`
+          `https://asuprocolombiasas.com/php/ApiMesaDeServicio/getSolicitudes.php`
         );
         setData(response.data);
       } catch (error) {
