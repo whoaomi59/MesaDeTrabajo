@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-const Reloj = () => {
+export default function Hora() {
   const [hora, setHora] = useState(new Date());
 
   useEffect(() => {
@@ -10,7 +10,6 @@ const Reloj = () => {
 
     return () => clearInterval(intervalo);
   }, []);
-
   return (
     <h1>
       {hora.getHours().toString().padStart(2, "0")}:
@@ -18,6 +17,4 @@ const Reloj = () => {
       {hora.getSeconds().toString().padStart(2, "0")}
     </h1>
   );
-};
-
-export default Reloj;
+}
