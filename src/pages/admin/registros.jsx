@@ -9,6 +9,7 @@ const axiosOnline = "https://asuprocolombiasas.com/php/ApiMesaDeServicio";
 
 export default function Registros() {
   const [data, setData] = useState([]);
+  const [dataorigin, setDataorigin] = useState([]);
   const [isOpen, setIsOpen] = useState(false); // Estado para abrir/cerrar el modal
   const [selectedRecord, setSelectedRecord] = useState(null); // Estado para almacenar el registro seleccionado
   const [Loaders, setLoaders] = useState(false);
@@ -48,9 +49,8 @@ export default function Registros() {
           comentario_solucion: item.comentario_solucion,
           Fecha_Solucion: item.Fecha_Solucion,
         }));
-        console.log(Formater);
-        console.log(response.data);
-        setData(Formater);
+        setDataorigin(response.data);
+        return setData(Formater);
       } catch (error) {
         setLoaders(false);
         return alert(error);
@@ -137,9 +137,10 @@ export default function Registros() {
               onChange={handleChange}
               className="w-full p-2 border rounded"
             >
-              <option value="Pendiente">Pendiente</option>
-              <option value="En proceso">En proceso</option>
-              <option value="Resuelto">Resuelto</option>
+              <option value="">Selecione...</option>
+              <option value="pendiente">Pendiente</option>
+              <option value="en proceso">En proceso</option>
+              <option value="resuelto">Resuelto</option>
             </select>
 
             <label className="block mt-4 mb-2">Comentario de solución:</label>
