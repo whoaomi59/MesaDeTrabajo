@@ -18,10 +18,38 @@ export default function Registros() {
       try {
         setLoaders(true);
         const response = await axios.get(
-          `${axiosOnline + "/getSolicitudes.php"}`
+          `${axiosLocal + "/getSolicitudes.php"}`
         );
         setLoaders(false);
-        setData(response.data);
+        const Formater = response.data.map((item) => ({
+          id: item.id,
+          nombre_completo: item.nombre_completo,
+          correo_electronico: item.correo_electronico,
+          numero_contacto: item.numero_contacto,
+          lugar_apoyo: item.lugar_apoyo,
+          sede: (
+            <span
+              class={`bg-${
+                item.sede == "YAMBORO" ? "green" : "orange"
+              }-600 px-2 py-1 text-xs text-white rounded`}
+            >
+              {item.sede}
+            </span>
+          ),
+          descripcion: item.descripcion,
+          Fecha_hora_solicitud: item.Fecha_hora_solicitud,
+          estado: item.estado,
+          Tecnico_asignado: (
+            <span class={`bg-blue-600 px-2 py-1 text-xs text-white rounded`}>
+              {item.Tecnico_asignado}
+            </span>
+          ),
+          comentario_solucion: item.comentario_solucion,
+          Fecha_Solucion: item.Fecha_Solucion,
+        }));
+        console.log(Formater);
+        console.log(response.data);
+        setData(Formater);
       } catch (error) {
         setLoaders(false);
         return alert(error);
