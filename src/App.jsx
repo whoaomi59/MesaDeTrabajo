@@ -3,26 +3,38 @@ import Formulario from "./pages/form";
 import Container from "./components/layouts/container";
 import Registros from "./pages/admin/registros";
 import "./App.css";
+import Auth from "./pages/auth";
+import ProtectedRoute from "./midelware/ProtectedRoute";
 
 function App() {
+  const Seccion = JSON.parse(sessionStorage.getItem("user")) || {};
+  let nombre = Seccion.name;
+  let usuario = Seccion.user;
+  let sede = Seccion.sede;
+
+  console.log(Seccion.sede);
+
   return (
     <Router>
       <Routes>
         <Route
           path="/*"
           element={
-            <>
-              <Container>
+            <ProtectedRoute>
+              <Container nombre={nombre}>
                 <Routes>
-                  <Route path="/admin/reg" element={<Registros />} />
+                  <Route
+                    path="/admin/reg"
+                    element={<Registros sede={sede} />}
+                  />
                 </Routes>
               </Container>
-            </>
+            </ProtectedRoute>
           }
         />
-
         <Route>
           <Route path="/" element={<Formulario />} />
+          <Route path="/Auth" element={<Auth />} />
         </Route>
       </Routes>
     </Router>

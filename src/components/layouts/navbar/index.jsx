@@ -1,6 +1,11 @@
 import * as Icons from "@heroicons/react/24/outline";
 
 export default function Navbar() {
+  const handleLogout = () => {
+    localStorage.removeItem("user");
+    window.location.href = "/Auth"; // Redirigir a la página de login
+  };
+
   return (
     <nav id="sidebar" className="lg:min-w-[250px] w-max max-lg:min-w-8">
       <div
@@ -29,8 +34,8 @@ export default function Navbar() {
           <h6 className="text-[#494848] text-sm font-bold px-4">Actions</h6>
           <ul className="mt-3 space-y-2">
             <li>
-              <a
-                href="/"
+              <button
+                onClick={handleLogout}
                 className="text-[#636363] text-sm flex items-center hover:bg-gray-100 rounded-md px-4 py-2 transition-all"
               >
                 <svg
@@ -45,7 +50,7 @@ export default function Navbar() {
                   />
                 </svg>
                 <span>Salir</span>
-              </a>
+              </button>
             </li>
           </ul>
         </div>

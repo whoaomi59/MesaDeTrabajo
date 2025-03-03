@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import Grid from "../../components/grid/dataGid/grid";
-import Loader from "../../components/contend/loader";
 import LoaderTable from "../../components/contend/loaderTable";
+import { HomeModernIcon, UserGroupIcon } from "@heroicons/react/24/outline";
 
 const axiosLocal = "http://localhost/Api_MesaServicio";
 const axiosOnline = "https://asuprocolombiasas.com/php/ApiMesaDeServicio";
 
-export default function Registros() {
+export default function Registros({ sede }) {
   const [data, setData] = useState([]);
   const [dataorigin, setDataorigin] = useState([]);
   const [isOpen, setIsOpen] = useState(false); // Estado para abrir/cerrar el modal
@@ -40,7 +40,8 @@ export default function Registros() {
 
   // Función para abrir el modal y establecer el registro seleccionado
   const abrirModal = (record) => {
-    setSelectedRecord(record);
+    const originalRecord = dataorigin.find((item) => item.id === record.id);
+    setSelectedRecord(originalRecord || record);
     setIsOpen(true);
   };
 
@@ -56,11 +57,13 @@ export default function Registros() {
   };
 
   // Función para guardar cambios en la API
-  const guardarCambios = async () => {
+  const guardarCambios = async (e) => {
+    e.preventDefault();
     try {
       await axios.put(`${axiosOnline + "/updateSolicitud.php"}`, {
         id: selectedRecord.id,
         estado: selectedRecord.estado,
+        Tecnico_asignado: selectedRecord.Tecnico_asignado,
         comentario_solucion: selectedRecord.comentario_solucion,
       });
 
@@ -73,6 +76,14 @@ export default function Registros() {
   };
 
   useEffect(() => {
+    // 🔹 Asignar la sede del usuario solo una vez al montar el componente
+    if (sede === "centro") {
+      setSedeFiltro("SENA-CENTRO");
+    } else if (sede === "yamboro") {
+      setSedeFiltro("YAMBORO");
+    }
+
+    // 🔹 Filtrar los datos
     const filteredData = dataorigin.filter((item) => {
       return (
         (nombreFiltro === "" ||
@@ -87,7 +98,7 @@ export default function Registros() {
     });
 
     setData(filteredData);
-  }, [nombreFiltro, sedeFiltro, fechaFiltro, estadoFiltro, dataorigin]);
+  }, [nombreFiltro, sedeFiltro, fechaFiltro, estadoFiltro, dataorigin]); // 🔥 `sede` no está en la dependencia para evitar bucles infinitos
 
   const Formater = data.map((item) => ({
     id: item.id,
@@ -99,8 +110,9 @@ export default function Registros() {
       <span
         class={`bg-${
           item.sede == "YAMBORO" ? "green" : "orange"
-        }-600 px-2 py-1 text-xs text-white rounded`}
+        }-600 px-2 py-1 text-xs text-white rounded flex`}
       >
+        <HomeModernIcon className="w-4 mr-1 text-gray-300" />
         {item.sede}
       </span>
     ),
@@ -108,7 +120,8 @@ export default function Registros() {
     Fecha_hora_solicitud: item.Fecha_hora_solicitud,
     estado: item.estado,
     Tecnico_asignado: (
-      <span class={`bg-blue-600 px-2 py-1 text-xs text-white rounded`}>
+      <span class={`bg-blue-600 px-2 py-1 text-xs text-white rounded flex`}>
+        <UserGroupIcon className="w-4 mr-1 text-gray-300" />
         {item.Tecnico_asignado}
       </span>
     ),
@@ -146,26 +159,27 @@ export default function Registros() {
                         onChange={(e) => setNombreFiltro(e.target.value)}
                       />
                     </div>
+                    {sede === "admin" && (
+                      <div class="flex flex-col">
+                        <label
+                          for="manufacturer"
+                          class="text-sm font-medium text-stone-600"
+                        >
+                          Sede
+                        </label>
 
-                    <div class="flex flex-col">
-                      <label
-                        for="manufacturer"
-                        class="text-sm font-medium text-stone-600"
-                      >
-                        Sede
-                      </label>
-
-                      <select
-                        id="manufacturer"
-                        className="bg-gray-100 w-full text-gray-800 text-sm px-4 py-3 rounded focus:bg-transparent outline-blue-500 transition-all"
-                        value={sedeFiltro}
-                        onChange={(e) => setSedeFiltro(e.target.value)}
-                      >
-                        <option value="">Seleccionar...</option>
-                        <option value="SENA-CENTRO">SENA centro</option>
-                        <option value="YAMBORO">Yamboro</option>
-                      </select>
-                    </div>
+                        <select
+                          id="manufacturer"
+                          className="bg-gray-100 w-full text-gray-800 text-sm px-4 py-3 rounded focus:bg-transparent outline-blue-500 transition-all"
+                          value={sedeFiltro}
+                          onChange={(e) => setSedeFiltro(e.target.value)}
+                        >
+                          <option value="">Seleccionar...</option>
+                          <option value="SENA-CENTRO">SENA centro</option>
+                          <option value="YAMBORO">Yamboro</option>
+                        </select>
+                      </div>
+                    )}
 
                     <div class="flex flex-col">
                       <label
@@ -239,7 +253,10 @@ export default function Registros() {
       {/* Modal para editar estado y comentario */}
       {isOpen && (
         <div className="fixed inset-0 bg-[#00000096] bg-opacity-50 flex justify-center items-center">
-          <div className="bg-white p-5 rounded-lg shadow-lg w-96">
+          <form
+            onSubmit={guardarCambios}
+            className="bg-white p-5 rounded-lg shadow-lg w-96"
+          >
             <h2 className="text-xl font-bold mb-4">Editar Solicitud</h2>
 
             <label className="block mb-2">Estado:</label>
@@ -248,12 +265,52 @@ export default function Registros() {
               value={selectedRecord?.estado || ""}
               onChange={handleChange}
               className="w-full p-2 border rounded"
+              required
             >
               <option value="">Selecione...</option>
               <option value="pendiente">Pendiente</option>
               <option value="en proceso">En proceso</option>
               <option value="resuelto">Resuelto</option>
             </select>
+            <label className="block mb-2">Estado:</label>
+            {sede === "admin" ? (
+              <select
+                name="Tecnico_asignado"
+                value={selectedRecord?.Tecnico_asignado || ""}
+                onChange={handleChange}
+                className="w-full p-2 border rounded"
+              >
+                <option value="">Selecione...</option>
+                <option value="Marcos Ramos">Marcos Ramos</option>
+                <option value="Felipe Gomez">Felipe Gomez</option>
+                <option value="Daver">Daver</option>
+                <option value="Fredy">Fredy</option>
+              </select>
+            ) : sede === "centro" ? (
+              <select
+                name="Tecnico_asignado"
+                value={selectedRecord?.Tecnico_asignado || ""}
+                onChange={handleChange}
+                className="w-full p-2 border rounded"
+              >
+                <option value="">Selecione...</option>
+                <option value="Marcos Ramos">Marcos Ramos</option>
+                <option value="Felipe Gomez">Felipe Gomez</option>
+              </select>
+            ) : sede === "yamboro" ? (
+              <select
+                name="Tecnico_asignado"
+                value={selectedRecord?.Tecnico_asignado || ""}
+                onChange={handleChange}
+                className="w-full p-2 border rounded"
+              >
+                <option value="">Selecione...</option>
+                <option value="Daver">Daver</option>
+                <option value="Fredy">Fredy</option>
+              </select>
+            ) : (
+              ""
+            )}
 
             <label className="block mt-4 mb-2">Comentario de solución:</label>
             <textarea
@@ -261,23 +318,25 @@ export default function Registros() {
               value={selectedRecord?.comentario_solucion || ""}
               onChange={handleChange}
               className="w-full p-2 border rounded"
+              required
             />
 
             <div className="flex justify-end gap-2 mt-4">
               <button
+                type="button"
                 onClick={cerrarModal}
                 className="bg-gray-500 text-white px-4 py-2 rounded"
               >
                 Cancelar
               </button>
               <button
-                onClick={guardarCambios}
+                type="onSubmit"
                 className="bg-green-600 text-white px-4 py-2 rounded"
               >
                 Guardar
               </button>
             </div>
-          </div>
+          </form>
         </div>
       )}
     </div>

@@ -1,9 +1,9 @@
-import { CalendarDaysIcon } from "@heroicons/react/16/solid";
+import { CalendarDaysIcon, KeyIcon } from "@heroicons/react/16/solid";
 import Hora from "./Hora";
 
 /* import Reloj from "./reloj"; */
 
-export default function Header() {
+export default function Header({ nombre }) {
   return (
     <header className="flex shadow-md py-1 px-4 sm:px-7 bg-white min-h-[70px] tracking-wide z-[110] fixed top-0 w-full">
       <div className="flex flex-wrap items-center justify-between gap-4 w-full relative">
@@ -62,6 +62,9 @@ export default function Header() {
                   <Hora />
                 </a>
               </div>
+              <div className="text-gray-500 flex">
+                <KeyIcon className="w-5 mr-1" /> {nombre}
+              </div>
 
               <div className="dropdown-menu relative flex shrink-0 group">
                 <img
@@ -86,7 +89,7 @@ export default function Header() {
                           data-original="#000000"
                         ></path>
                       </svg>
-                      Account
+                      Configuraciones
                     </a>
                     <hr className="my-2 -mx-2" />
 
@@ -109,69 +112,7 @@ export default function Header() {
                           data-original="#000000"
                         ></path>
                       </svg>
-                      Dashboard
-                    </a>
-                    <a
-                      href="javascript:void(0)"
-                      className="text-sm text-gray-800 cursor-pointer flex items-center p-2 rounded-md hover:bg-gray-100 dropdown-item transition duration-300 ease-in-out"
-                    >
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        className="w-4 h-4 mr-3 fill-current"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          d="M18 2c2.206 0 4 1.794 4 4v12c0 2.206-1.794 4-4 4H6c-2.206 0-4-1.794-4-4V6c0-2.206 1.794-4 4-4zm0-2H6a6 6 0 0 0-6 6v12a6 6 0 0 0 6 6h12a6 6 0 0 0 6-6V6a6 6 0 0 0-6-6z"
-                          data-original="#000000"
-                        />
-                        <path
-                          d="M12 18a1 1 0 0 1-1-1V7a1 1 0 0 1 2 0v10a1 1 0 0 1-1 1z"
-                          data-original="#000000"
-                        />
-                        <path
-                          d="M6 12a1 1 0 0 1 1-1h10a1 1 0 0 1 0 2H7a1 1 0 0 1-1-1z"
-                          data-original="#000000"
-                        />
-                      </svg>
-                      Posts
-                    </a>
-                    <a
-                      href="javascript:void(0)"
-                      className="text-sm text-gray-800 cursor-pointer flex items-center p-2 rounded-md hover:bg-gray-100 dropdown-item transition duration-300 ease-in-out"
-                    >
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        className="w-4 h-4 mr-3 fill-current"
-                        viewBox="0 0 510 510"
-                      >
-                        <g fill-opacity=".9">
-                          <path
-                            d="M255 0C114.75 0 0 114.75 0 255s114.75 255 255 255 255-114.75 255-255S395.25 0 255 0zm0 459c-112.2 0-204-91.8-204-204S142.8 51 255 51s204 91.8 204 204-91.8 204-204 204z"
-                            data-original="#000000"
-                          />
-                          <path
-                            d="M267.75 127.5H229.5v153l132.6 81.6 20.4-33.15-114.75-68.85z"
-                            data-original="#000000"
-                          />
-                        </g>
-                      </svg>
-                      Schedules
-                    </a>
-                    <a
-                      href="javascript:void(0)"
-                      className="text-sm text-gray-800 cursor-pointer flex items-center p-2 rounded-md hover:bg-gray-100 dropdown-item transition duration-300 ease-in-out"
-                    >
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        className="w-4 h-4 mr-3 fill-current"
-                        viewBox="0 0 6 6"
-                      >
-                        <path
-                          d="M3.172.53a.265.266 0 0 0-.262.268v2.127a.265.266 0 0 0 .53 0V.798A.265.266 0 0 0 3.172.53zm1.544.532a.265.266 0 0 0-.026 0 .265.266 0 0 0-.147.47c.459.391.749.973.749 1.626 0 1.18-.944 2.131-2.116 2.131A2.12 2.12 0 0 1 1.06 3.16c0-.65.286-1.228.74-1.62a.265.266 0 1 0-.344-.404A2.667 2.667 0 0 0 .53 3.158a2.66 2.66 0 0 0 2.647 2.663 2.657 2.657 0 0 0 2.645-2.663c0-.812-.363-1.542-.936-2.03a.265.266 0 0 0-.17-.066z"
-                          data-original="#000000"
-                        />
-                      </svg>
-                      Logout
+                      Salir
                     </a>
                   </div>
                 </div>

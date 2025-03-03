@@ -1,10 +1,10 @@
 import Header from "../header";
 import Navbar from "../navbar";
 
-export default function Container(props) {
+export default function Container({ children, nombre }) {
   return (
     <div className="relative font-[sans-serif] pt-[70px] h-screen">
-      <Header />
+      <Header nombre={nombre} />
       <div>
         <div className="flex items-start">
           <Navbar />
@@ -26,7 +26,7 @@ export default function Container(props) {
           </button>
 
           <section className="main-content w-full overflow-auto p-6">
-            <div className="overflow-x-auto">{props.children}</div>
+            <div className="overflow-x-auto">{children}</div>
           </section>
         </div>
       </div>
