@@ -2,6 +2,9 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import Grid from "../../components/grid/dataGid/grid";
 
+const axiosLocal = "http://localhost/Api_MesaServicio";
+const axiosOnline = "https://asuprocolombiasas.com/php/ApiMesaDeServicio";
+
 export default function Registros() {
   const [data, setData] = useState([]);
   const [isOpen, setIsOpen] = useState(false); // Estado para abrir/cerrar el modal
@@ -11,7 +14,7 @@ export default function Registros() {
     const Get = async () => {
       try {
         const response = await axios.get(
-          `https://asuprocolombiasas.com/php/ApiMesaDeServicio/getSolicitudes.php`
+          `${axiosOnline + "/getSolicitudes.php"}`
         );
         setData(response.data);
       } catch (error) {
@@ -41,7 +44,7 @@ export default function Registros() {
   // Función para guardar cambios en la API
   const guardarCambios = async () => {
     try {
-      await axios.put("http://localhost/Api_MesaServicio/updateSolicitud.php", {
+      await axios.put(`${axiosOnline + "/updateSolicitud.php"}`, {
         id: selectedRecord.id,
         estado: selectedRecord.estado,
         comentario_solucion: selectedRecord.comentario_solucion,
