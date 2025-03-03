@@ -1,4 +1,5 @@
 import { CalendarDaysIcon } from "@heroicons/react/16/solid";
+import Reloj from "./reloj";
 /* import Reloj from "./reloj"; */
 
 export default function Header() {
@@ -57,7 +58,7 @@ export default function Header() {
               <div className="flex items-center space-x-6 max-lg:flex-wrap">
                 <a href="/" className="flex">
                   <CalendarDaysIcon className="w-6 text-gray-400 mr-1" />
-                  {/*  <Reloj /> */}
+                  <Reloj />
                 </a>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
