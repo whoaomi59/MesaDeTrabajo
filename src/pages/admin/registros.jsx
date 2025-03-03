@@ -19,7 +19,7 @@ export default function Registros() {
       try {
         setLoaders(true);
         const response = await axios.get(
-          `${axiosLocal + "/getSolicitudes.php"}`
+          `${axiosOnline + "/getSolicitudes.php"}`
         );
         setLoaders(false);
         const Formater = response.data.map((item) => ({
@@ -79,7 +79,7 @@ export default function Registros() {
   // Función para guardar cambios en la API
   const guardarCambios = async () => {
     try {
-      await axios.put(`${axiosLocal + "/updateSolicitud.php"}`, {
+      await axios.put(`${axiosOnline + "/updateSolicitud.php"}`, {
         id: selectedRecord.id,
         estado: selectedRecord.estado,
         comentario_solucion: selectedRecord.comentario_solucion,
