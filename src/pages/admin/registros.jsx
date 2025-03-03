@@ -12,13 +12,14 @@ export default function Registros() {
   const [isOpen, setIsOpen] = useState(false); // Estado para abrir/cerrar el modal
   const [selectedRecord, setSelectedRecord] = useState(null); // Estado para almacenar el registro seleccionado
   const [Loaders, setLoaders] = useState(false);
+  const [Refhres, setRefhres] = useState(false);
 
   useEffect(() => {
     const Get = async () => {
       try {
         setLoaders(true);
         const response = await axios.get(
-          `${axiosOnline + "/getSolicitudes.php"}`
+          `${axiosLocal + "/getSolicitudes.php"}`
         );
         setLoaders(false);
         const Formater = response.data.map((item) => ({
@@ -56,7 +57,7 @@ export default function Registros() {
       }
     };
     Get();
-  }, []);
+  }, [Refhres]);
 
   // Función para abrir el modal y establecer el registro seleccionado
   const abrirModal = (record) => {
@@ -78,18 +79,13 @@ export default function Registros() {
   // Función para guardar cambios en la API
   const guardarCambios = async () => {
     try {
-      await axios.put(`${axiosOnline + "/updateSolicitud.php"}`, {
+      await axios.put(`${axiosLocal + "/updateSolicitud.php"}`, {
         id: selectedRecord.id,
         estado: selectedRecord.estado,
         comentario_solucion: selectedRecord.comentario_solucion,
       });
 
-      // Actualizar la tabla después de la edición
-      setData((prevData) =>
-        prevData.map((item) =>
-          item.id === selectedRecord.id ? selectedRecord : item
-        )
-      );
+      setRefhres((prev) => !prev);
 
       cerrarModal();
     } catch (error) {
@@ -112,7 +108,7 @@ export default function Registros() {
             { key: "lugar_apoyo", label: "Lugar Apoyo" },
             { key: "sede", label: "Sede" },
             { key: "descripcion", label: "Descripción" },
-            { key: "Fecha_hora_solicitud", label: "Fecha y Hora" },
+            { key: "Fecha_hora_solicitud", label: "Fecha Solicitud" },
             { key: "estado", label: "Estado" },
             { key: "Tecnico_asignado", label: "Técnico Asignado" },
             { key: "comentario_solucion", label: "Comentario Solución" },
