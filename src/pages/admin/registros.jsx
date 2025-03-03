@@ -18,7 +18,7 @@ export default function Registros() {
       try {
         setLoaders(true);
         const response = await axios.get(
-          `${axiosLocal + "/getSolicitudes.php"}`
+          `${axiosOnline + "/getSolicitudes.php"}`
         );
         setLoaders(false);
         const Formater = response.data.map((item) => ({
