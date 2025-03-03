@@ -2,6 +2,9 @@ import { useState } from "react";
 import axios from "axios";
 import Loader from "../../components/contend/loader";
 
+const axiosLocal = "http://localhost/Api_MesaServicio";
+const axiosOnline = "https://asuprocolombiasas.com/php/ApiMesaDeServicio";
+
 const tecnicosYamboro = ["Daver", "Fredy"];
 const tecnicosCentro = ["Marcos Ramos", "Felipe Gomez"];
 
@@ -41,7 +44,7 @@ export default function Formulario() {
     try {
       setLoaders(true);
       const response = await axios.post(
-        "https://asuprocolombiasas.com/php/ApiMesaDeServicio/postSolicitudes.php",
+        `${axiosOnline + "/postSolicitudes.php"}`,
         datosFinales
       );
       setLoaders(false);

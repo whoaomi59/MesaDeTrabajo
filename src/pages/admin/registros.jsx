@@ -15,6 +15,12 @@ export default function Registros() {
   const [Loaders, setLoaders] = useState(false);
   const [Refhres, setRefhres] = useState(false);
 
+  //FILTROS
+  const [nombreFiltro, setNombreFiltro] = useState("");
+  const [sedeFiltro, setSedeFiltro] = useState("");
+  const [fechaFiltro, setFechaFiltro] = useState("");
+  const [estadoFiltro, setEstadoFiltro] = useState("");
+
   useEffect(() => {
     const Get = async () => {
       try {
@@ -23,34 +29,7 @@ export default function Registros() {
           `${axiosOnline + "/getSolicitudes.php"}`
         );
         setLoaders(false);
-        const Formater = response.data.map((item) => ({
-          id: item.id,
-          nombre_completo: item.nombre_completo,
-          correo_electronico: item.correo_electronico,
-          numero_contacto: item.numero_contacto,
-          lugar_apoyo: item.lugar_apoyo,
-          sede: (
-            <span
-              class={`bg-${
-                item.sede == "YAMBORO" ? "green" : "orange"
-              }-600 px-2 py-1 text-xs text-white rounded`}
-            >
-              {item.sede}
-            </span>
-          ),
-          descripcion: item.descripcion,
-          Fecha_hora_solicitud: item.Fecha_hora_solicitud,
-          estado: item.estado,
-          Tecnico_asignado: (
-            <span class={`bg-blue-600 px-2 py-1 text-xs text-white rounded`}>
-              {item.Tecnico_asignado}
-            </span>
-          ),
-          comentario_solucion: item.comentario_solucion,
-          Fecha_Solucion: item.Fecha_Solucion,
-        }));
         setDataorigin(response.data);
-        return setData(Formater);
       } catch (error) {
         setLoaders(false);
         return alert(error);
@@ -93,36 +72,169 @@ export default function Registros() {
     }
   };
 
+  useEffect(() => {
+    const filteredData = dataorigin.filter((item) => {
+      return (
+        (nombreFiltro === "" ||
+          item.nombre_completo
+            .toLowerCase()
+            .includes(nombreFiltro.toLowerCase())) &&
+        (sedeFiltro === "" || item.sede === sedeFiltro) &&
+        (fechaFiltro === "" ||
+          item.Fecha_hora_solicitud.startsWith(fechaFiltro)) &&
+        (estadoFiltro === "" || item.estado === estadoFiltro)
+      );
+    });
+
+    setData(filteredData);
+  }, [nombreFiltro, sedeFiltro, fechaFiltro, estadoFiltro, dataorigin]);
+
+  const Formater = data.map((item) => ({
+    id: item.id,
+    nombre_completo: item.nombre_completo,
+    correo_electronico: item.correo_electronico,
+    numero_contacto: item.numero_contacto,
+    lugar_apoyo: item.lugar_apoyo,
+    sede: (
+      <span
+        class={`bg-${
+          item.sede == "YAMBORO" ? "green" : "orange"
+        }-600 px-2 py-1 text-xs text-white rounded`}
+      >
+        {item.sede}
+      </span>
+    ),
+    descripcion: item.descripcion,
+    Fecha_hora_solicitud: item.Fecha_hora_solicitud,
+    estado: item.estado,
+    Tecnico_asignado: (
+      <span class={`bg-blue-600 px-2 py-1 text-xs text-white rounded`}>
+        {item.Tecnico_asignado}
+      </span>
+    ),
+    comentario_solucion: item.comentario_solucion,
+    Fecha_Solucion: item.Fecha_Solucion,
+  }));
+
   return (
     <div>
       {Loaders ? (
         <LoaderTable />
       ) : (
-        <Grid
-          module={"Registros"}
-          columns={[
-            { key: "id", label: "ID" },
-            { key: "nombre_completo", label: "Nombre" },
-            { key: "correo_electronico", label: "Correo Electrónico" },
-            { key: "numero_contacto", label: "Número Contacto" },
-            { key: "lugar_apoyo", label: "Lugar Apoyo" },
-            { key: "sede", label: "Sede" },
-            { key: "descripcion", label: "Descripción" },
-            { key: "Fecha_hora_solicitud", label: "Fecha Solicitud" },
-            { key: "estado", label: "Estado" },
-            { key: "Tecnico_asignado", label: "Técnico Asignado" },
-            { key: "comentario_solucion", label: "Comentario Solución" },
-            { key: "Fecha_Solucion", label: "Fecha Solución" },
-          ]}
-          data={data}
-          actions={[
-            {
-              icon: "PencilSquareIcon",
-              className: "bg-green-600 text-white",
-              onClick: (record) => abrirModal(record), // Llama a la función abrirModal con el registro
-            },
-          ]}
-        />
+        <>
+          <h1 className="mb-8 text-3xl font-extrabold leading-none tracking-tight text-gray-600 ">
+            Registros
+          </h1>
+          <div class="w-full mb-5">
+            <div class="flex flex-col">
+              <div class="rounded-xl border border-gray-200 bg-white p-6 shadow-lg">
+                <form class="">
+                  <div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+                    <div class="flex flex-col">
+                      <label
+                        for="name"
+                        class="text-sm font-medium text-stone-600"
+                      >
+                        Nombre
+                      </label>
+                      <input
+                        type="text"
+                        id="name"
+                        placeholder="eje:Juan Carlos..."
+                        className="bg-gray-100 w-full text-gray-800 text-sm px-4 py-3 rounded focus:bg-transparent outline-blue-500 transition-all"
+                        value={nombreFiltro}
+                        onChange={(e) => setNombreFiltro(e.target.value)}
+                      />
+                    </div>
+
+                    <div class="flex flex-col">
+                      <label
+                        for="manufacturer"
+                        class="text-sm font-medium text-stone-600"
+                      >
+                        Sede
+                      </label>
+
+                      <select
+                        id="manufacturer"
+                        className="bg-gray-100 w-full text-gray-800 text-sm px-4 py-3 rounded focus:bg-transparent outline-blue-500 transition-all"
+                        value={sedeFiltro}
+                        onChange={(e) => setSedeFiltro(e.target.value)}
+                      >
+                        <option value="">Seleccionar...</option>
+                        <option value="SENA-CENTRO">SENA centro</option>
+                        <option value="YAMBORO">Yamboro</option>
+                      </select>
+                    </div>
+
+                    <div class="flex flex-col">
+                      <label
+                        for="date-time"
+                        class="text-sm font-medium text-stone-600"
+                      >
+                        Fecha Solicitud
+                      </label>
+                      <input
+                        type="date"
+                        id="date"
+                        className="bg-gray-100 w-full text-gray-800 text-sm px-4 py-3 rounded focus:bg-transparent outline-blue-500 transition-all"
+                        value={fechaFiltro}
+                        onChange={(e) => setFechaFiltro(e.target.value)}
+                      />
+                    </div>
+
+                    <div class="flex flex-col">
+                      <label
+                        for="status"
+                        class="text-sm font-medium text-stone-600"
+                      >
+                        Estado
+                      </label>
+
+                      <select
+                        id="status"
+                        className="bg-gray-100 w-full text-gray-800 text-sm px-4 py-3 rounded focus:bg-transparent outline-blue-500 transition-all"
+                        value={estadoFiltro}
+                        onChange={(e) => setEstadoFiltro(e.target.value)}
+                      >
+                        <option value="">Seleccionar...</option>
+                        <option value="pendiente">pendiente</option>
+                        <option value="en proceso">en proceso</option>
+                        <option value="resuelto">resuelto</option>
+                      </select>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+
+          <Grid
+            module={""}
+            columns={[
+              { key: "id", label: "ID" },
+              { key: "nombre_completo", label: "Nombre" },
+              { key: "correo_electronico", label: "Correo Electrónico" },
+              { key: "numero_contacto", label: "Número Contacto" },
+              { key: "lugar_apoyo", label: "Lugar Apoyo" },
+              { key: "sede", label: "Sede" },
+              { key: "descripcion", label: "Descripción" },
+              { key: "Fecha_hora_solicitud", label: "Fecha Solicitud" },
+              { key: "estado", label: "Estado" },
+              { key: "Tecnico_asignado", label: "Técnico Asignado" },
+              { key: "comentario_solucion", label: "Comentario Solución" },
+              { key: "Fecha_Solucion", label: "Fecha Solución" },
+            ]}
+            data={Formater}
+            actions={[
+              {
+                icon: "PencilSquareIcon",
+                className: "bg-green-600 text-white",
+                onClick: (record) => abrirModal(record), // Llama a la función abrirModal con el registro
+              },
+            ]}
+          />
+        </>
       )}
       {/* Modal para editar estado y comentario */}
       {isOpen && (
