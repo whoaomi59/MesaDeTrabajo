@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import Grid from "../../components/grid/dataGid/grid";
+import Loader from "../../components/contend/loader";
+import LoaderTable from "../../components/contend/loaderTable";
 
 const axiosLocal = "http://localhost/Api_MesaServicio";
 const axiosOnline = "https://asuprocolombiasas.com/php/ApiMesaDeServicio";
@@ -9,16 +11,20 @@ export default function Registros() {
   const [data, setData] = useState([]);
   const [isOpen, setIsOpen] = useState(false); // Estado para abrir/cerrar el modal
   const [selectedRecord, setSelectedRecord] = useState(null); // Estado para almacenar el registro seleccionado
+  const [Loaders, setLoaders] = useState(false);
 
   useEffect(() => {
     const Get = async () => {
       try {
+        setLoaders(true);
         const response = await axios.get(
           `${axiosOnline + "/getSolicitudes.php"}`
         );
+        setLoaders(false);
         setData(response.data);
       } catch (error) {
-        alert(error);
+        setLoaders(false);
+        return alert(error);
       }
     };
     Get();
@@ -65,32 +71,35 @@ export default function Registros() {
 
   return (
     <div>
-      <Grid
-        module={"Registros"}
-        columns={[
-          { key: "id", label: "ID" },
-          { key: "nombre_completo", label: "Nombre" },
-          { key: "correo_electronico", label: "Correo Electrónico" },
-          { key: "numero_contacto", label: "Número Contacto" },
-          { key: "lugar_apoyo", label: "Lugar Apoyo" },
-          { key: "sede", label: "Sede" },
-          { key: "descripcion", label: "Descripción" },
-          { key: "Fecha_hora_solicitud", label: "Fecha y Hora" },
-          { key: "estado", label: "Estado" },
-          { key: "Tecnico_asignado", label: "Técnico Asignado" },
-          { key: "comentario_solucion", label: "Comentario Solución" },
-          { key: "Fecha_Solucion", label: "Fecha Solución" },
-        ]}
-        data={data}
-        actions={[
-          {
-            icon: "PencilSquareIcon",
-            className: "bg-green-600 text-white",
-            onClick: (record) => abrirModal(record), // Llama a la función abrirModal con el registro
-          },
-        ]}
-      />
-
+      {Loaders ? (
+        <LoaderTable />
+      ) : (
+        <Grid
+          module={"Registros"}
+          columns={[
+            { key: "id", label: "ID" },
+            { key: "nombre_completo", label: "Nombre" },
+            { key: "correo_electronico", label: "Correo Electrónico" },
+            { key: "numero_contacto", label: "Número Contacto" },
+            { key: "lugar_apoyo", label: "Lugar Apoyo" },
+            { key: "sede", label: "Sede" },
+            { key: "descripcion", label: "Descripción" },
+            { key: "Fecha_hora_solicitud", label: "Fecha y Hora" },
+            { key: "estado", label: "Estado" },
+            { key: "Tecnico_asignado", label: "Técnico Asignado" },
+            { key: "comentario_solucion", label: "Comentario Solución" },
+            { key: "Fecha_Solucion", label: "Fecha Solución" },
+          ]}
+          data={data}
+          actions={[
+            {
+              icon: "PencilSquareIcon",
+              className: "bg-green-600 text-white",
+              onClick: (record) => abrirModal(record), // Llama a la función abrirModal con el registro
+            },
+          ]}
+        />
+      )}
       {/* Modal para editar estado y comentario */}
       {isOpen && (
         <div className="fixed inset-0 bg-[#00000096] bg-opacity-50 flex justify-center items-center">

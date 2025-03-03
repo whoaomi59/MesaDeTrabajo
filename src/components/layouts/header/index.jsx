@@ -2,7 +2,7 @@ export default function Header() {
   return (
     <header className="flex shadow-md py-1 px-4 sm:px-7 bg-white min-h-[70px] tracking-wide z-[110] fixed top-0 w-full">
       <div className="flex flex-wrap items-center justify-between gap-4 w-full relative">
-        <a href="javascript:void(0)">
+        <a href="/">
           <img
             src="/img/sena_google_forms_header.png"
             alt="logo"

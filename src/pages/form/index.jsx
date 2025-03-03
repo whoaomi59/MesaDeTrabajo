@@ -1,5 +1,6 @@
 import { useState } from "react";
 import axios from "axios";
+import Loader from "../../components/contend/loader";
 
 const tecnicosYamboro = ["Daver", "Fredy"];
 const tecnicosCentro = ["Marcos Ramos", "Felipe Gomez"];
@@ -14,6 +15,8 @@ export default function Formulario() {
     descripcion: "",
     Tecnico_asignado: "",
   });
+
+  const [Loaders, setLoaders] = useState(false);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -36,10 +39,12 @@ export default function Formulario() {
     const datosFinales = { ...formData, Tecnico_asignado: tecnicoAsignado };
 
     try {
+      setLoaders(true);
       const response = await axios.post(
         "https://asuprocolombiasas.com/php/ApiMesaDeServicio/postSolicitudes.php",
         datosFinales
       );
+      setLoaders(false);
       alert(response.data.message || "Solicitud enviada con éxito");
       setFormData({
         nombre_completo: "",
@@ -53,6 +58,7 @@ export default function Formulario() {
     } catch (error) {
       alert("Error al enviar la solicitud");
       console.error(error);
+      return setLoaders(false);
     }
   };
 
@@ -165,7 +171,7 @@ export default function Formulario() {
             type="submit"
             className="w-full bg-green-500 text-white py-2 rounded-md font-medium hover:bg-green-700 transition duration-300"
           >
-            Enviar
+            {Loaders ? <Loader /> : "Enviar"}
           </button>
         </form>
       </div>
