@@ -2,6 +2,12 @@ import { useState } from "react";
 
 const users = [
   {
+    name: "Admin",
+    user: "admin*",
+    password: "123456789",
+    sede: "admin",
+  },
+  {
     name: "Elian Felipe Gomez Recalde",
     user: "felipecentro",
     password: "123456789",
@@ -12,12 +18,6 @@ const users = [
     user: "marcoscentro",
     password: "123456789",
     sede: "centro",
-  },
-  {
-    name: "Admin",
-    user: "admin*",
-    password: "123456789",
-    sede: "admin",
   },
   {
     name: "Fredy Johan Vargas Portilla",
