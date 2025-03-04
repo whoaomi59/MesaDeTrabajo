@@ -1,3 +1,3 @@
-export function Verdetalle(){
-    return   window.location.href = "/admin/reg/detalle/:id";
+export function Verdetalle(record){
+    return   window.location.href = `/admin/reg/detalle/${record.id}`;
 }

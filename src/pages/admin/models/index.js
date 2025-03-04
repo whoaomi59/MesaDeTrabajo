@@ -1,5 +1,5 @@
 export const ModelsRegistro=[
-    { key: "id", label: "ID" },
+  /*   { key: "id", label: "ID" }, */
     { key: "nombre_completo", label: "Nombre" },
     { key: "correo_electronico", label: "Correo Electrónico" },
     { key: "numero_contacto", label: "Número Contacto" },
