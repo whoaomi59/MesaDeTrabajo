@@ -5,6 +5,8 @@ import Registros from "./pages/admin/registros";
 import "./App.css";
 import Auth from "./pages/auth";
 import ProtectedRoute from "./midelware/ProtectedRoute";
+import Dashboar from "./pages/admin/dashboar";
+import { Analytics } from "@vercel/analytics/react";
 
 function App() {
   const Seccion = JSON.parse(sessionStorage.getItem("user")) || {};
@@ -21,8 +23,10 @@ function App() {
           path="/*"
           element={
             <ProtectedRoute>
+              <Analytics />
               <Container nombre={nombre}>
                 <Routes>
+                  <Route path="/admin" element={<Dashboar />} />
                   <Route
                     path="/admin/reg"
                     element={<Registros sede={sede} />}
