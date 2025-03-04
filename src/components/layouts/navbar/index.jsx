@@ -2,7 +2,7 @@ import * as Icons from "@heroicons/react/24/outline";
 
 export default function Navbar() {
   const handleLogout = () => {
-    localStorage.removeItem("user");
+    sessionStorage.removeItem("user");
     window.location.href = "/Auth"; // Redirigir a la página de login
   };
 

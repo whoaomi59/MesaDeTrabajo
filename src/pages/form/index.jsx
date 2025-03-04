@@ -1,6 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
 import Loader from "../../components/contend/loader";
+import { Alertas } from "../../components/contend/alert";
 
 const axiosLocal = "http://localhost/Api_MesaServicio";
 const axiosOnline = "https://asuprocolombiasas.com/php/ApiMesaDeServicio";
@@ -44,11 +45,10 @@ export default function Formulario() {
     try {
       setLoaders(true);
       const response = await axios.post(
-        `${axiosOnline + "/postSolicitudes.php"}`,
+        `${axiosLocal + "/postSolicitudes.php"}`,
         datosFinales
       );
       setLoaders(false);
-      alert(response.data.message || "Solicitud enviada con éxito");
       setFormData({
         nombre_completo: "",
         correo_electronico: "",
@@ -58,6 +58,12 @@ export default function Formulario() {
         descripcion: "",
         Tecnico_asignado: "",
       });
+
+      const alertas = Alertas({
+        message: response.data.message || "Solicitud enviada con éxito",
+        icon: "success",
+      });
+      return alertas;
     } catch (error) {
       alert("Error al enviar la solicitud");
       console.error(error);

@@ -26,6 +26,10 @@ function App() {
                   <Route
                     path="/admin/reg"
                     element={<Registros sede={sede} />}
+                  />{" "}
+                  <Route
+                    path="/admin/reg/detalle/:id"
+                    element={"DETALLE DE LA SOLICITUD..."}
                   />
                 </Routes>
               </Container>
