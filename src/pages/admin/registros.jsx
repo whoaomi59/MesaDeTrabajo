@@ -265,6 +265,11 @@ export default function Registros({ sede }) {
                 className: "bg-green-600 text-white",
                 onClick: (record) => abrirModal(record), // Llama a la función abrirModal con el registro
               },
+              {
+                icon: "LinkIcon",
+                className: "bg-blue-600 text-white",
+                onClick: (record) => abrirModal(record), // Llama a la función abrirModal con el registro
+              },
             ]}
           />
         </>
