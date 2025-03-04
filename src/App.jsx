@@ -23,7 +23,6 @@ function App() {
           path="/*"
           element={
             <ProtectedRoute>
-              <Analytics />
               <Container nombre={nombre}>
                 <Routes>
                   <Route path="/admin" element={<Dashboar />} />
@@ -41,6 +40,7 @@ function App() {
           }
         />
         <Route>
+          <Analytics />
           <Route path="/" element={<Formulario />} />
           <Route path="/Auth" element={<Auth />} />
         </Route>
