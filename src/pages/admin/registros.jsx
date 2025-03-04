@@ -2,7 +2,13 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import Grid from "../../components/grid/dataGid/grid";
 import LoaderTable from "../../components/contend/loaderTable";
-import { HomeModernIcon, UserGroupIcon } from "@heroicons/react/24/outline";
+import {
+  ArrowPathIcon,
+  CheckIcon,
+  CubeTransparentIcon,
+  HomeModernIcon,
+  UserGroupIcon,
+} from "@heroicons/react/24/outline";
 
 const axiosLocal = "http://localhost/Api_MesaServicio";
 const axiosOnline = "https://asuprocolombiasas.com/php/ApiMesaDeServicio";
@@ -110,18 +116,31 @@ export default function Registros({ sede }) {
       <span
         class={`bg-${
           item.sede == "YAMBORO" ? "green" : "orange"
-        }-600 px-2 py-1 text-xs text-white rounded flex`}
+        }-500 px-2 py-1 text-xs text-white rounded flex`}
       >
-        <HomeModernIcon className="w-4 mr-1 text-gray-300" />
+        <HomeModernIcon className="w-4 mr-1" />
         {item.sede}
       </span>
     ),
     descripcion: item.descripcion,
     Fecha_hora_solicitud: item.Fecha_hora_solicitud,
-    estado: item.estado,
+    estado: (
+      <div className="flexx">
+        {item.estado === "resuelto" ? (
+          <CheckIcon className="w-5 text-gray-500 mr-1" />
+        ) : item.estado === "pendiente" ? (
+          <CubeTransparentIcon className="w-5 text-gray-500 mr-1" />
+        ) : item.estado === "en proceso" ? (
+          <ArrowPathIcon className="w-5 text-gray-500 mr-1" />
+        ) : (
+          ""
+        )}
+        {item.estado}
+      </div>
+    ),
     Tecnico_asignado: (
-      <span class={`bg-blue-600 px-2 py-1 text-xs text-white rounded flex`}>
-        <UserGroupIcon className="w-4 mr-1 text-gray-300" />
+      <span class={`bg-blue-500 px-2 py-1 text-xs text-white rounded flex`}>
+        <UserGroupIcon className="w-4 mr-1" />
         {item.Tecnico_asignado}
       </span>
     ),
