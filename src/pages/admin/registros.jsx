@@ -17,7 +17,7 @@ import { Alertas } from "../../components/contend/alert";
 const axiosLocal = "http://localhost/Api_MesaServicio";
 const axiosOnline = "https://asuprocolombiasas.com/php/ApiMesaDeServicio";
 
-const BaseURL = axiosLocal;
+const BaseURL = axiosOnline;
 
 export default function Registros({ sede }) {
   const [data, setData] = useState([]);
