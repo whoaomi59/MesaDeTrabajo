@@ -286,7 +286,7 @@ export default function Registros({ sede }) {
               name="estado"
               value={selectedRecord?.estado || ""}
               onChange={handleChange}
-              className="w-full p-2 border rounded"
+              className="bg-gray-100 w-full text-gray-800 text-sm px-4 py-3 rounded focus:bg-transparent outline-blue-500 transition-all"
               required
             >
               <option value="">Selecione...</option>
@@ -300,7 +300,7 @@ export default function Registros({ sede }) {
                 name="Tecnico_asignado"
                 value={selectedRecord?.Tecnico_asignado || ""}
                 onChange={handleChange}
-                className="w-full p-2 border rounded"
+                className="bg-gray-100 w-full text-gray-800 text-sm px-4 py-3 rounded focus:bg-transparent outline-blue-500 transition-all"
               >
                 <option value="">Selecione...</option>
                 <option value="Marcos Ramos">Marcos Ramos</option>
@@ -314,7 +314,7 @@ export default function Registros({ sede }) {
                 name="Tecnico_asignado"
                 value={selectedRecord?.Tecnico_asignado || ""}
                 onChange={handleChange}
-                className="w-full p-2 border rounded"
+                className="bg-gray-100 w-full text-gray-800 text-sm px-4 py-3 rounded focus:bg-transparent outline-blue-500 transition-all"
               >
                 <option value="">Selecione...</option>
                 <option value="Marcos Ramos">Marcos Ramos</option>
@@ -325,7 +325,7 @@ export default function Registros({ sede }) {
                 name="Tecnico_asignado"
                 value={selectedRecord?.Tecnico_asignado || ""}
                 onChange={handleChange}
-                className="w-full p-2 border rounded"
+                className="bg-gray-100 w-full text-gray-800 text-sm px-4 py-3 rounded focus:bg-transparent outline-blue-500 transition-all"
               >
                 <option value="">Selecione...</option>
                 <option value="Daver">Daver</option>
@@ -340,7 +340,7 @@ export default function Registros({ sede }) {
               name="comentario_solucion"
               value={selectedRecord?.comentario_solucion || ""}
               onChange={handleChange}
-              className="w-full p-2 border rounded"
+              className="bg-gray-100 w-full text-gray-800 text-sm px-4 py-3 rounded focus:bg-transparent outline-blue-500 transition-all"
               required
             />
 
