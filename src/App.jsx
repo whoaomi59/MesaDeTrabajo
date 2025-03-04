@@ -7,6 +7,7 @@ import Auth from "./pages/auth";
 import ProtectedRoute from "./midelware/ProtectedRoute";
 import Dashboar from "./pages/admin/dashboar";
 import { Analytics } from "@vercel/analytics/react";
+import { SpeedInsights } from "@vercel/speed-insights/react";
 
 function App() {
   const Seccion = JSON.parse(sessionStorage.getItem("user")) || {};
@@ -19,6 +20,7 @@ function App() {
   return (
     <Router>
       <Analytics />
+      <SpeedInsights />
       <Routes>
         <Route
           path="/*"
