@@ -2,7 +2,21 @@ import React, { useState } from "react";
 import * as Icons from "@heroicons/react/24/outline";
 
 const Grid = ({ columns, data, actions, module }) => {
-  const [expandedRows, setExpandedRows] = useState({});
+  const [currentPage, setCurrentPage] = useState(1); // Página actual
+  const [itemsPerPage] = useState(6); // Número de elementos por página
+
+  // Calcular el índice de los elementos que deben ser mostrados en la página actual
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const currentData = data.slice(startIndex, startIndex + itemsPerPage);
+
+  // Calcular el número total de páginas
+  const totalPages = Math.ceil(data.length / itemsPerPage);
+
+  const handlePageChange = (page) => {
+    if (page >= 1 && page <= totalPages) {
+      setCurrentPage(page);
+    }
+  };
 
   return (
     <div className="overflow-x-auto">
@@ -27,7 +41,7 @@ const Grid = ({ columns, data, actions, module }) => {
         </thead>
 
         <tbody>
-          {data.map((row, rowIndex) => (
+          {currentData.map((row, rowIndex) => (
             <React.Fragment key={rowIndex}>
               <tr className="even:bg-blue-50 cursor-pointer sm:table-row">
                 {columns.map((col) => (
@@ -65,6 +79,27 @@ const Grid = ({ columns, data, actions, module }) => {
           ))}
         </tbody>
       </table>
+
+      {/* Paginación */}
+      <div className="flex justify-between items-center mt-4">
+        <button
+          onClick={() => handlePageChange(currentPage - 1)}
+          disabled={currentPage === 1}
+          className="px-4 py-2 bg-gray-300 rounded disabled:opacity-50"
+        >
+          Anterior
+        </button>
+        <span>
+          Página {currentPage} de {totalPages}
+        </span>
+        <button
+          onClick={() => handlePageChange(currentPage + 1)}
+          disabled={currentPage === totalPages}
+          className="px-4 py-2 bg-gray-300 rounded disabled:opacity-50"
+        >
+          Siguiente
+        </button>
+      </div>
     </div>
   );
 };
