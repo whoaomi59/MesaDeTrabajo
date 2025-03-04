@@ -1,6 +1,6 @@
 import * as Icons from "@heroicons/react/24/outline";
 
-export default function Navbar() {
+export default function Navbar({ toggle }) {
   const handleLogout = () => {
     sessionStorage.removeItem("user");
     window.location.href = "/Auth"; // Redirigir a la página de login
@@ -11,7 +11,9 @@ export default function Navbar() {
       <div
         id="sidebar-collapse-menu"
         style={{ height: "calc(100vh - 72px)" }}
-        className="bg-white shadow-lg h-screen fixed py-6 px-4 top-[70px] left-0 overflow-auto z-[99] lg:min-w-[250px] lg:w-max max-lg:w-0 max-lg:invisible transition-all duration-500"
+        className={`bg-white shadow-lg h-screen fixed py-6 px-4 top-[70px]  z-[99] lg:min-w-[250px]${
+          toggle ? "" : "lg:w-max max-lg:w-0 max-lg:invisible"
+        }  transition-all duration-100`}
       >
         <div>
           <h6 className="text-[#494848] text-sm font-bold px-4">
