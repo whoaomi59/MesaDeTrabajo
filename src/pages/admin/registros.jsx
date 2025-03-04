@@ -283,6 +283,7 @@ export default function Registros({ sede }) {
                 <option value="">Selecione...</option>
                 <option value="Marcos Ramos">Marcos Ramos</option>
                 <option value="Felipe Gomez">Felipe Gomez</option>
+                <option value="Jhon Mario">Jhon Mario</option>
                 <option value="Daver">Daver</option>
                 <option value="Fredy">Fredy</option>
               </select>
