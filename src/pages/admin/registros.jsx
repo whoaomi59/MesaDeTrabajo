@@ -272,7 +272,7 @@ export default function Registros({ sede }) {
               <option value="en proceso">En proceso</option>
               <option value="resuelto">Resuelto</option>
             </select>
-            <label className="block mb-2">Estado:</label>
+            <label className="block mb-2">Tecnico Asignado:</label>
             {sede === "admin" ? (
               <select
                 name="Tecnico_asignado"
