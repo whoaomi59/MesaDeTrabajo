@@ -9,9 +9,15 @@ import {
   HomeModernIcon,
   UserGroupIcon,
 } from "@heroicons/react/24/outline";
+import Header from "./components/header";
+import { ModelsRegistro } from "./models";
+import { Verdetalle } from "./fuctions";
+import { Alertas } from "../../components/contend/alert";
 
 const axiosLocal = "http://localhost/Api_MesaServicio";
 const axiosOnline = "https://asuprocolombiasas.com/php/ApiMesaDeServicio";
+
+const BaseURL = axiosLocal;
 
 export default function Registros({ sede }) {
   const [data, setData] = useState([]);
@@ -31,14 +37,13 @@ export default function Registros({ sede }) {
     const Get = async () => {
       try {
         setLoaders(true);
-        const response = await axios.get(
-          `${axiosOnline + "/getSolicitudes.php"}`
-        );
+        const response = await axios.get(`${BaseURL + "/getSolicitudes.php"}`);
         setLoaders(false);
         setDataorigin(response.data);
       } catch (error) {
         setLoaders(false);
-        return alert(error);
+        const alertas = Alertas({ message: error, icon: "error" });
+        return alertas;
       }
     };
     Get();
@@ -66,7 +71,7 @@ export default function Registros({ sede }) {
   const guardarCambios = async (e) => {
     e.preventDefault();
     try {
-      await axios.put(`${axiosOnline + "/updateSolicitud.php"}`, {
+      await axios.put(`${BaseURL + "/updateSolicitud.php"}`, {
         id: selectedRecord.id,
         estado: selectedRecord.estado,
         Tecnico_asignado: selectedRecord.Tecnico_asignado,
@@ -74,10 +79,18 @@ export default function Registros({ sede }) {
       });
 
       setRefhres((prev) => !prev);
-
       cerrarModal();
+      const alertas = Alertas({
+        message: "Registro Actualizado.",
+        icon: "success",
+      });
+      return alertas;
     } catch (error) {
-      alert("Error al actualizar la solicitud");
+      const alertas = Alertas({
+        message: error + "Error al actualizar la solicitud",
+        icon: "error",
+      });
+      return alertas;
     }
   };
 
@@ -154,9 +167,7 @@ export default function Registros({ sede }) {
         <LoaderTable />
       ) : (
         <>
-          <h1 className="mb-8 text-3xl font-extrabold leading-none tracking-tight text-gray-600 ">
-            Registros
-          </h1>
+          <Header />
           <div class="w-full mb-5">
             <div class="flex flex-col">
               <div class="rounded-xl border border-gray-200 bg-white p-6 shadow-lg">
@@ -244,20 +255,7 @@ export default function Registros({ sede }) {
 
           <Grid
             module={""}
-            columns={[
-              { key: "id", label: "ID" },
-              { key: "nombre_completo", label: "Nombre" },
-              { key: "correo_electronico", label: "Correo Electrónico" },
-              { key: "numero_contacto", label: "Número Contacto" },
-              { key: "lugar_apoyo", label: "Lugar Apoyo" },
-              { key: "sede", label: "Sede" },
-              { key: "descripcion", label: "Descripción" },
-              { key: "Fecha_hora_solicitud", label: "Fecha Solicitud" },
-              { key: "estado", label: "Estado" },
-              { key: "Tecnico_asignado", label: "Técnico Asignado" },
-              { key: "comentario_solucion", label: "Comentario Solución" },
-              { key: "Fecha_Solucion", label: "Fecha Solución" },
-            ]}
+            columns={ModelsRegistro}
             data={Formater}
             actions={[
               {
@@ -268,7 +266,7 @@ export default function Registros({ sede }) {
               {
                 icon: "LinkIcon",
                 className: "bg-blue-600 text-white",
-                onClick: (record) => abrirModal(record), // Llama a la función abrirModal con el registro
+                onClick: (record) => Verdetalle(record), // Llama a la función abrirModal con el registro
               },
             ]}
           />
