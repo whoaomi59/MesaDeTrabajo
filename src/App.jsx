@@ -18,6 +18,7 @@ function App() {
 
   return (
     <Router>
+      <Analytics />
       <Routes>
         <Route
           path="/*"
@@ -40,7 +41,6 @@ function App() {
           }
         />
         <Route>
-          <Analytics />
           <Route path="/" element={<Formulario />} />
           <Route path="/Auth" element={<Auth />} />
         </Route>
