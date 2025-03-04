@@ -1,15 +1,23 @@
+import { useState } from "react";
 import Header from "../header";
 import Navbar from "../navbar";
 
 export default function Container({ children, nombre }) {
+  const [statemenu, setstatemenu] = useState(false);
+
+  const Toggle = () => {
+    setstatemenu(true);
+    alert("sapo");
+  };
+
   return (
     <div className="relative font-[sans-serif] pt-[70px] h-screen">
-      <Header nombre={nombre} />
+      <Header nombre={nombre} Toggle={Toggle} />
       <div>
         <div className="flex items-start">
-          <Navbar />
+          <Navbar toggle={statemenu} />
           <button
-            id="toggle-sidebar"
+            onClick={() => setstatemenu((prev) => !prev)}
             className="lg:hidden w-8 h-8 z-[100] fixed top-[74px] left-[10px] cursor-pointer bg-[#007bff] flex items-center justify-center rounded-full outline-none transition-all duration-500"
           >
             <svg
