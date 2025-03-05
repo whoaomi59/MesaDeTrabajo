@@ -13,6 +13,7 @@ import Header from "./components/header";
 import { ModelsRegistro } from "./models";
 import { Verdetalle } from "./fuctions";
 import { Alertas } from "../../components/contend/alert";
+import GridRegistros from "../../components/grid/dataGid/gridreg";
 
 const axiosLocal = "http://localhost/Api_MesaServicio";
 const axiosOnline = "https://asuprocolombiasas.com/php/ApiMesaDeServicio";
@@ -137,20 +138,7 @@ export default function Registros({ sede }) {
     ),
     descripcion: item.descripcion,
     Fecha_hora_solicitud: item.Fecha_hora_solicitud,
-    estado: (
-      <div className="flexx">
-        {item.estado === "resuelto" ? (
-          <CheckIcon className="w-5 text-gray-500 mr-1" />
-        ) : item.estado === "pendiente" ? (
-          <CubeTransparentIcon className="w-5 text-gray-500 mr-1" />
-        ) : item.estado === "en proceso" ? (
-          <ArrowPathIcon className="w-5 text-gray-500 mr-1" />
-        ) : (
-          ""
-        )}
-        {item.estado}
-      </div>
-    ),
+    estado: item.estado,
     Tecnico_asignado: (
       <span class={`bg-blue-500 px-2 py-1 text-xs text-white rounded flex`}>
         <UserGroupIcon className="w-4 mr-1" />
@@ -253,7 +241,7 @@ export default function Registros({ sede }) {
             </div>
           </div>
 
-          <Grid
+          <GridRegistros
             module={""}
             columns={ModelsRegistro}
             data={Formater}
