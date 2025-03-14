@@ -46,7 +46,7 @@ const GridRegistros = ({ columns, data, actions, module }) => {
               <tr
                 className={`cursor-pointer sm:table-row ${
                   row.estado === "pendiente"
-                    ? "bg-gray-200"
+                    ? "bg-gray-10"
                     : row.estado === "en proceso"
                     ? "bg-gray-100"
                     : ""
@@ -55,13 +55,13 @@ const GridRegistros = ({ columns, data, actions, module }) => {
                 {columns.map((col) => (
                   <td
                     key={col.key}
-                    className="p-4 text-sm text-black hidden sm:table-cell"
+                    className="p-4 text-sm text-black  sm:table-cell"
                   >
                     {row[col.key]}
                   </td>
                 ))}
                 {actions && actions.length > 0 && (
-                  <td className="p-4 space-x-2 hidden sm:table-cell">
+                  <td className="p-4 space-x-2  sm:table-cell">
                     {actions.map((action, actionIndex) => {
                       const IconComponent = Icons[action.icon];
                       return (
