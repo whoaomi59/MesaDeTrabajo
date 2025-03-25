@@ -2,13 +2,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import Grid from "../../components/grid/dataGid/grid";
 import LoaderTable from "../../components/contend/loaderTable";
-import {
-  ArrowPathIcon,
-  CheckIcon,
-  CubeTransparentIcon,
-  HomeModernIcon,
-  UserGroupIcon,
-} from "@heroicons/react/24/outline";
+import { HomeModernIcon, UserGroupIcon } from "@heroicons/react/24/outline";
 import Header from "./components/header";
 import { ModelsRegistro } from "./models";
 import { Verdetalle } from "./fuctions";
@@ -31,6 +25,7 @@ export default function Registros({ sede }) {
   //FILTROS
   const [nombreFiltro, setNombreFiltro] = useState("");
   const [sedeFiltro, setSedeFiltro] = useState("");
+  const [tecnicoFiltro, settecnicoFiltro] = useState("");
   const [fechaFiltro, setFechaFiltro] = useState("");
   const [estadoFiltro, setEstadoFiltro] = useState("");
 
@@ -105,12 +100,14 @@ export default function Registros({ sede }) {
 
     // 🔹 Filtrar los datos
     const filteredData = dataorigin.filter((item) => {
+      console.log(item);
       return (
         (nombreFiltro === "" ||
           item.nombre_completo
             .toLowerCase()
             .includes(nombreFiltro.toLowerCase())) &&
         (sedeFiltro === "" || item.sede === sedeFiltro) &&
+        (tecnicoFiltro === "" || item.Tecnico_asignado === tecnicoFiltro) &&
         (fechaFiltro === "" ||
           item.Fecha_hora_solicitud.startsWith(fechaFiltro)) &&
         (estadoFiltro === "" || item.estado === estadoFiltro)
@@ -118,7 +115,14 @@ export default function Registros({ sede }) {
     });
 
     setData(filteredData);
-  }, [nombreFiltro, sedeFiltro, fechaFiltro, estadoFiltro, dataorigin]); // 🔥 `sede` no está en la dependencia para evitar bucles infinitos
+  }, [
+    nombreFiltro,
+    sedeFiltro,
+    fechaFiltro,
+    estadoFiltro,
+    dataorigin,
+    tecnicoFiltro,
+  ]); // 🔥 `sede` no está en la dependencia para evitar bucles infinitos
 
   const Formater = data.map((item) => ({
     id: item.id,
@@ -176,6 +180,28 @@ export default function Registros({ sede }) {
                         value={nombreFiltro}
                         onChange={(e) => setNombreFiltro(e.target.value)}
                       />
+                    </div>
+                    <div class="flex flex-col">
+                      <label
+                        for="manufacturer"
+                        class="text-sm font-medium text-stone-600"
+                      >
+                        Técnico Asignado
+                      </label>
+
+                      <select
+                        id="manufacturer"
+                        className="bg-gray-100 w-full text-gray-800 text-sm px-4 py-3 rounded focus:bg-transparent outline-blue-500 transition-all"
+                        value={tecnicoFiltro}
+                        onChange={(e) => settecnicoFiltro(e.target.value)}
+                      >
+                        <option value="">Seleccionar...</option>
+                        <option value="Marcos Ramos">Marcos Ramos</option>
+                        <option value="Felipe Gomez">Felipe Gomez</option>
+                        <option value="Jhon Mario">Jhon Mario</option>
+                        <option value="Daver">Daver</option>
+                        <option value="Fredy">Fredy</option>
+                      </select>
                     </div>
                     {sede === "admin" && (
                       <div class="flex flex-col">
@@ -305,6 +331,7 @@ export default function Registros({ sede }) {
                 className="bg-gray-100 w-full text-gray-800 text-sm px-4 py-3 rounded focus:bg-transparent outline-blue-500 transition-all"
               >
                 <option value="">Selecione...</option>
+                <option value="Jhon Mario">Jhon Mario</option>
                 <option value="Marcos Ramos">Marcos Ramos</option>
                 <option value="Felipe Gomez">Felipe Gomez</option>
               </select>
