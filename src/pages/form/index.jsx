@@ -6,7 +6,7 @@ const axiosLocal = "http://localhost/Api_MesaServicio";
 const axiosOnline = "https://asuprocolombiasas.com/php/ApiMesaDeServicio";
 
 const tecnicosYamboro = ["Daver", "Fredy"];
-const tecnicosCentro = ["Marcos Ramos", "Felipe Gomez"];
+const tecnicosCentro = ["Marcos Ramos", "Felipe Gomez", "Jhon Mario"];
 
 export default function Formulario() {
   const [formData, setFormData] = useState({
