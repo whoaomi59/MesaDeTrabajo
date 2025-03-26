@@ -8,6 +8,7 @@ import { ModelsRegistro } from "./models";
 import { Verdetalle } from "./fuctions";
 import { Alertas } from "../../components/contend/alert";
 import GridRegistros from "../../components/grid/dataGid/gridreg";
+import { WhatsAppLink } from "../../components/api/whassapp";
 
 const axiosLocal = "http://localhost/Api_MesaServicio";
 const axiosOnline = "https://asuprocolombiasas.com/php/ApiMesaDeServicio";
@@ -128,7 +129,12 @@ export default function Registros({ sede }) {
     id: item.id,
     nombre_completo: item.nombre_completo,
     correo_electronico: item.correo_electronico,
-    numero_contacto: item.numero_contacto,
+    numero_contacto: (
+      <WhatsAppLink
+        phoneNumber={item.numero_contacto}
+        message="Hola, quisiera más información."
+      />
+    ),
     lugar_apoyo: item.lugar_apoyo,
     sede: (
       <span
