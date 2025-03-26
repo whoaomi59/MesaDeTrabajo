@@ -46,7 +46,7 @@ const GridRegistros = ({ columns, data, actions, module }) => {
               <tr
                 className={`cursor-pointer sm:table-row ${
                   row.estado === "pendiente"
-                    ? "bg-gray-10"
+                    ? "bg-gray-200"
                     : row.estado === "en proceso"
                     ? "bg-gray-100"
                     : ""
