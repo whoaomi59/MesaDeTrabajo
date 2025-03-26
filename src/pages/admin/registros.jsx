@@ -132,7 +132,8 @@ export default function Registros({ sede }) {
     numero_contacto: (
       <WhatsAppLink
         phoneNumber={item.numero_contacto}
-        message={`Estimado/a ${item.nombre_completo},  
+        message={`
+        Estimado/a ${item.nombre_completo},  
 
         Soy parte del equipo de Apoyo TIC del SENA. Me comunico con usted en relación con el caso radicado N° ${item.id}.  
         
