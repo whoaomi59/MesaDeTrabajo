@@ -132,12 +132,16 @@ export default function Registros({ sede }) {
     numero_contacto: (
       <WhatsAppLink
         phoneNumber={item.numero_contacto}
-        message={`Cordial saludo,${item.nombre_completo},Soy de apoyo TIC SENA,Este chat es con el fin de dar solucion a su caso radicado con N° ${item.id},
-        ¿Podría confirmarnos si ya se le ha dado seguimiento o si requiere alguna gestión adicional de nuestra parte?
-        
-        Quedo atento a su respuesta.
+        message={`Estimado/a ${item.nombre_completo},  
 
-        Saludos cordiales,
+        Soy parte del equipo de Apoyo TIC del SENA. Me comunico con usted en relación con el caso radicado N° ${item.id}.  
+        
+        ¿Podría confirmarnos si el caso ha sido atendido satisfactoriamente o si requiere asistencia adicional?  
+        
+        Quedamos atentos a su confirmación para continuar con el proceso correspondiente.  
+        
+        Atentamente,  
+        Equipo de Apoyo TIC - SENA  
         `}
       />
     ),
