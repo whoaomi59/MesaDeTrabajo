@@ -132,7 +132,17 @@ export default function Registros({ sede }) {
     numero_contacto: (
       <WhatsAppLink
         phoneNumber={item.numero_contacto}
-        message="Hola, quisiera más información."
+        message={`Estimado/a ${item.nombre_completo},  
+
+        Soy parte del equipo de Apoyo TIC del SENA. Me comunico con usted en relación con el caso radicado N° ${item.id}.  
+        
+        ¿Podría confirmarnos si el caso ha sido atendido satisfactoriamente o si requiere asistencia adicional?  
+        
+        Quedamos atentos a su confirmación para continuar con el proceso correspondiente.  
+        
+        Atentamente,  
+        Equipo de Apoyo TIC - SENA  
+        `}
       />
     ),
     lugar_apoyo: item.lugar_apoyo,
