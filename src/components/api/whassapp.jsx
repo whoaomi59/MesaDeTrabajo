@@ -4,7 +4,8 @@ export const WhatsAppLink = ({ phoneNumber, message }) => {
   // Elimina espacios y caracteres no numéricos del número
   const cleanedNumber = `57${phoneNumber.replace(/\D/g, "")}`; // Prefijo +57 para Colombia
   const encodedMessage = encodeURIComponent(message);
-  const whatsappUrl = `https://wa.me/${cleanedNumber}?text=${encodedMessage}`;
+  /*  const whatsappUrl = `https://wa.me/${cleanedNumber}?text=${encodedMessage}`; */
+  const whatsappUrl = `https://web.whatsapp.com/send/?phone=${cleanedNumber}&text=${encodedMessage}`;
 
   return (
     <a
