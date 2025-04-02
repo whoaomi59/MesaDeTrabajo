@@ -7,6 +7,8 @@ export const WhatsAppLink = ({ phoneNumber, message }) => {
   const whatsappUrlMovil = `https://wa.me/${cleanedNumber}?text=${encodedMessage}`;
   const whatsappUrl = `https://web.whatsapp.com/send/?phone=${cleanedNumber}&text=${encodedMessage}`;
 
+  console.log(message)
+
   return (
     <div>
       <a

@@ -31,7 +31,7 @@ function App() {
                   <Route path="/admin" element={<Dashboar />} />
                   <Route
                     path="/admin/reg"
-                    element={<Registros sede={sede} />}
+                    element={<Registros sede={sede} usuario={nombre}/>}
                   />{" "}
                   <Route
                     path="/admin/reg/detalle/:id"

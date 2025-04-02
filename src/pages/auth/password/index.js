@@ -10,6 +10,11 @@ export const users = [
     user: "felipecentro",
     password: "123456789",
     sede: "centro",
+  }, {
+    name: "Jhon Mario Chilito Calderon",
+    user: "jchilito",
+    password: "123456789",
+    sede: "centro",
   },
   {
     name: "Marcos Ramos Martinez",

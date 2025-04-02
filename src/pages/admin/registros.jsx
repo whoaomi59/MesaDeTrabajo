@@ -15,7 +15,7 @@ const axiosOnline = "https://asuprocolombiasas.com/php/ApiMesaDeServicio";
 
 const BaseURL = axiosOnline;
 
-export default function Registros({ sede }) {
+export default function Registros({ sede ,usuario}) {
   const [data, setData] = useState([]);
   const [dataorigin, setDataorigin] = useState([]);
   const [isOpen, setIsOpen] = useState(false); // Estado para abrir/cerrar el modal
@@ -133,16 +133,15 @@ export default function Registros({ sede }) {
       <WhatsAppLink
         phoneNumber={item.numero_contacto}
         message={`
-        Estimado/a ${item.nombre_completo},  
+  Estimado/a ${item.nombre_completo}, 
+  Soy parte del equipo de Apoyo TIC del SENA. Me comunico con usted en relación con el caso radicado N° ${item.id}.  
 
-        Soy parte del equipo de Apoyo TIC del SENA. Me comunico con usted en relación con el caso radicado N° ${item.id}.  
-        
-        ¿Podría confirmarnos si el caso ha sido atendido satisfactoriamente o si requiere asistencia adicional?  
-        
-        Quedamos atentos a su confirmación para continuar con el proceso correspondiente.  
-        
-        Atentamente,  
-        Equipo de Apoyo TIC - SENA  
+  ¿Podría confirmarnos si el caso ha sido atendido satisfactoriamente o si requiere asistencia adicional?  
+
+  Quedamos atentos a su confirmación para continuar con el proceso.  
+
+  Atentamente,${usuario}  
+  Equipo de Apoyo TIC - SENA  
         `}
       />
     ),
