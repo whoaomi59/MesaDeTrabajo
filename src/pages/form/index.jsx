@@ -67,7 +67,8 @@ export default function Formulario() {
 
   return (
     <>
-      <div className="bg-[#E6F4EA] pt-4 pr-4 flex justify-end">
+      <div className="bg-[#E6F4EA] pt-4 pr-4 pl-4 flex justify-between items-center">
+        <p className="text-gray-500">Create by Jhon Mario Chilito<span className="mr-2">🔑</span></p>
         <a
           href="/Auth"
           className="text-green-700 font-semibold hover:underline"
@@ -75,6 +76,7 @@ export default function Formulario() {
           Ingresar
         </a>
       </div>
+
       <div className="flex justify-center items-center min-h-screen bg-[#E6F4EA] p-4">
         <div className="bg-white w-full max-w-lg p-6 rounded-lg shadow-lg">
           {/* Header */}
