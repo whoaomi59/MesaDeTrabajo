@@ -1,6 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
 import Loader from "../../components/contend/loader";
+import Swal from "sweetalert2";
 
 const axiosLocal = "http://localhost/Api_MesaServicio";
 const axiosOnline = "https://asuprocolombiasas.com/php/ApiMesaDeServicio";
@@ -20,6 +21,18 @@ export default function Formulario() {
   });
 
   const [Loaders, setLoaders] = useState(false);
+
+  const Toast = Swal.mixin({
+    toast: true,
+    position: "top-end",
+    showConfirmButton: false,
+    timer: 3000,
+    timerProgressBar: true,
+    didOpen: (toast) => {
+      toast.onmouseenter = Swal.stopTimer;
+      toast.onmouseleave = Swal.resumeTimer;
+    },
+  });
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -48,7 +61,6 @@ export default function Formulario() {
         datosFinales
       );
       setLoaders(false);
-      alert(response.data.message || "Solicitud enviada con éxito");
       setFormData({
         nombre_completo: "",
         correo_electronico: "",
@@ -58,10 +70,18 @@ export default function Formulario() {
         descripcion: "",
         Tecnico_asignado: "",
       });
+
+      return Toast.fire({
+        icon: "success",
+        title: response.data.message || "Solicitud enviada con éxito",
+      });
     } catch (error) {
-      alert("Error al enviar la solicitud");
       console.error(error);
-      return setLoaders(false);
+      setLoaders(false);
+      return Toast.fire({
+        icon: "error",
+        title: "Error al enviar la solicitud",
+      });
     }
   };
 
