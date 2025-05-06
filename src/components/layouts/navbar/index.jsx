@@ -29,15 +29,6 @@ export default function Navbar({ toggle }) {
                 <span>Registros</span>
               </a>
             </li>
-            <li className="text-[#636363]">
-              <a
-                href="/admin/reg"
-                className="text-sm flex items-center hover:bg-gray-100 rounded-md px-4 py-2 transition-all"
-              >
-                <Icons.ShieldCheckIcon className="w-5 mr-2 text-gray-500" />
-                <span>Registros</span>
-              </a>
-            </li>
           </ul>
         </div>
 
