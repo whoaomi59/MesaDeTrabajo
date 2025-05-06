@@ -68,7 +68,9 @@ export default function Formulario() {
   return (
     <>
       <div className="bg-[#E6F4EA] pt-4 pr-4 pl-4 flex justify-between items-center">
-        <p className="text-gray-500">Create by Jhon Mario Chilito<span className="mr-2">🔑</span></p>
+        <p className="text-gray-500">
+          Create by Jhon Mario Chilito<span className="mr-2">🔑</span>V.02
+        </p>
         <a
           href="/Auth"
           className="text-green-700 font-semibold hover:underline"
@@ -145,6 +147,7 @@ export default function Formulario() {
                 onChange={handleChange}
                 value={formData.sede}
                 className="bg-gray-100 w-full text-gray-800 text-sm px-4 py-3 rounded focus:bg-transparent outline-blue-500 transition-all"
+                required
               >
                 <option value="">Seleccionar...</option>
                 <option value="SENA-CENTRO">SENA Centro</option>

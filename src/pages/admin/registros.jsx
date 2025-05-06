@@ -2,7 +2,12 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import Grid from "../../components/grid/dataGid/grid";
 import LoaderTable from "../../components/contend/loaderTable";
-import { HomeModernIcon, UserGroupIcon } from "@heroicons/react/24/outline";
+import {
+  CloudArrowDownIcon,
+  HomeModernIcon,
+  PrinterIcon,
+  UserGroupIcon,
+} from "@heroicons/react/24/outline";
 import Header from "./components/header";
 import { ModelsRegistro } from "./models";
 import { Verdetalle } from "./fuctions";
@@ -15,7 +20,7 @@ const axiosOnline = "https://asuprocolombiasas.com/php/ApiMesaDeServicio";
 
 const BaseURL = axiosOnline;
 
-export default function Registros({ sede ,usuario}) {
+export default function Registros({ sede, usuario }) {
   const [data, setData] = useState([]);
   const [dataorigin, setDataorigin] = useState([]);
   const [isOpen, setIsOpen] = useState(false); // Estado para abrir/cerrar el modal
@@ -280,6 +285,22 @@ export default function Registros({ sede ,usuario}) {
                   </div>
                 </form>
               </div>
+            </div>
+          </div>
+          {/* BOTONES DE FUNCIONALIDADES DE REPORTE Y MAS */}
+          <div className="flex">
+            <div />
+            <div class="flex overflow-hidden bg-white border divide-x rounded-lg rtl:flex-row-reverse dark:bg-gray-900 dark:border-gray-700 dark:divide-gray-700">
+              <button class="flex items-center px-4 py-2 text-sm font-medium text-gray-600 transition-colors duration-200 sm:text-base sm:px-6 dark:hover:bg-gray-800 dark:text-gray-300 gap-x-3 hover:bg-gray-100">
+                <CloudArrowDownIcon className="w-5 h-5 sm:w-6 sm:h-6" />
+
+                <span>Download</span>
+              </button>
+
+              <button class="flex items-center px-4 py-2 text-sm font-medium text-gray-600 transition-colors duration-200 sm:text-base sm:px-6 dark:hover:bg-gray-800 dark:text-gray-300 gap-x-3 hover:bg-gray-100">
+                <PrinterIcon className="w-5 h-5 sm:w-6 sm:h-6" />
+                <span>Print</span>
+              </button>
             </div>
           </div>
 
