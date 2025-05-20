@@ -20,7 +20,7 @@ export default function Auth() {
 
       // Redireccionar o mostrar mensaje de éxito
       alert(`Bienvenido, ${userFound.name}`);
-      window.location.href = "/admin/reg"; // Cambia la ruta según tu app
+      window.location.href = "/admin"; // Cambia la ruta según tu app
     } else {
       setError("Usuario o contraseña incorrectos.");
     }

@@ -1,4 +1,5 @@
 import * as Icons from "@heroicons/react/24/outline";
+import { ChartPie, UserPen } from "lucide-react";
 
 export default function Navbar({ toggle }) {
   const handleLogout = () => {
@@ -22,10 +23,19 @@ export default function Navbar({ toggle }) {
           <ul className="mt-3 space-y-2">
             <li className="text-[#636363]">
               <a
+                href="/admin"
+                className="text-sm flex items-center hover:bg-gray-100 rounded-md px-4 py-2 transition-all"
+              >
+                <ChartPie className="w-5 mr-2 text-gray-500" />
+                <span>Dashboard</span>
+              </a>
+            </li>
+            <li className="text-[#636363]">
+              <a
                 href="/admin/reg"
                 className="text-sm flex items-center hover:bg-gray-100 rounded-md px-4 py-2 transition-all"
               >
-                <Icons.ShieldCheckIcon className="w-5 mr-2 text-gray-500" />
+                <UserPen className="w-5 mr-2 text-gray-500" />
                 <span>Registros</span>
               </a>
             </li>
