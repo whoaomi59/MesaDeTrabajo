@@ -16,12 +16,14 @@ import {
   Bar,
 } from "recharts";
 import { AlignEndHorizontal, BeakerIcon, UserRoundCog } from "lucide-react";
+import LoaderTable from "../../components/contend/loaderTable";
 
 export default function Dashboard() {
   const [tickets, setTickets] = useState([]);
   const [filteredTickets, setFilteredTickets] = useState([]);
   const [metrics, setMetrics] = useState([]);
   const [dailyData, setDailyData] = useState([]);
+  const [loader, setloader] = useState(false);
 
   // Filtros fechas
   const [startDate, setStartDate] = useState(null);
@@ -33,10 +35,12 @@ export default function Dashboard() {
         "https://asuprocolombiasas.com/php/ApiMesaDeServicio/getSolicitudes.php"
       )
       .then((res) => {
+        setloader(true);
         setTickets(res.data);
         setFilteredTickets(res.data);
         calcularMetricas(res.data);
         calcularTicketsPorDia(res.data);
+        setloader(false);
       })
       .catch((err) => console.error(err));
   }, []);
@@ -116,6 +120,10 @@ export default function Dashboard() {
 
     setDailyData(datosDiarios);
   };
+
+  if (loader) {
+    return <LoaderTable />;
+  }
 
   return (
     <div className="min-h-screen  from-indigo-50 via-white to-indigo-100 ">
