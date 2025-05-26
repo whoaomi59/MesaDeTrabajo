@@ -281,16 +281,6 @@ export default function Registros({ sede, usuario }) {
               </div>
             </div>
           </div>
-          <div className="mb-5">
-            <button
-              type="button"
-              class="text-white bg-green-600 hover:bg-green-700  rounded-full  p-2 "
-              onClick={() => setRefhres((prev) => !prev)}
-              title="Refrescar la pagina"
-            >
-              <FolderSync className="w-6 text-white" />
-            </button>
-          </div>
 
           {Error ? (
             <div class="flex w-full max-w-sm overflow-hidden bg-white rounded-lg shadow-md">
@@ -310,6 +300,7 @@ export default function Registros({ sede, usuario }) {
           ) : (
             <GridRegistros
               module={""}
+              setRefhres={setRefhres}
               columns={ModelsRegistro}
               data={Formater}
               actions={[
