@@ -8,7 +8,7 @@ import { Verdetalle } from "./fuctions";
 import { Alertas } from "../../components/contend/alert";
 import GridRegistros from "../../components/grid/dataGid/gridreg";
 import { WhatsAppLink } from "../../components/api/whassapp";
-import { Bomb, FolderSync } from "lucide-react";
+import { Bomb, FolderSync, X } from "lucide-react";
 
 const axiosLocal = "http://localhost/Api_MesaServicio";
 const axiosOnline = "https://asuprocolombiasas.com/php/ApiMesaDeServicio";
@@ -326,8 +326,11 @@ export default function Registros({ sede, usuario }) {
             onSubmit={guardarCambios}
             className="bg-white p-5 rounded-lg shadow-lg w-96"
           >
-            <h2 className="text-xl font-bold mb-4">Editar Solicitud</h2>
+            <button type="button" onClick={cerrarModal} title="Cerrar">
+              <X className="w-5 h-5" />
+            </button>
 
+            <h2 className="text-xl font-bold mb-4">Editar Solicitud</h2>
             <label className="block mb-2">Estado:</label>
             <select
               name="estado"
@@ -382,7 +385,6 @@ export default function Registros({ sede, usuario }) {
             ) : (
               ""
             )}
-
             <label className="block mt-4 mb-2">Comentario de solución:</label>
             <textarea
               name="comentario_solucion"
@@ -391,7 +393,6 @@ export default function Registros({ sede, usuario }) {
               className="bg-gray-100 w-full text-gray-800 text-sm px-4 py-3 rounded focus:bg-transparent outline-blue-500 transition-all"
               required
             />
-
             <div className="flex justify-end gap-2 mt-4">
               <button
                 type="button"
