@@ -127,7 +127,7 @@ export default function Dashboard() {
             className="w-120"
           />
         </div>
-        <div className="flex justify-center gap-6 mb-4">
+        {/*  <div className="flex justify-center gap-6 mb-4">
           <div className="flex flex-col items-center">
             <label className="mb-2 font-semibold text-green-600">Desde</label>
             <DatePicker
@@ -158,7 +158,7 @@ export default function Dashboard() {
               dateFormat="yyyy-MM-dd"
             />
           </div>
-        </div>
+        </div> */}
         <div className="grid md:grid-cols-3 gap-8 mb-12">
           <div className="bg-white shadow-lg rounded-3xl p-6 hover:shadow-indigo-300 transition-shadow">
             <div className="flex items-center mb-6">
