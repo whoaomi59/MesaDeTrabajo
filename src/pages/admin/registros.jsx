@@ -169,7 +169,7 @@ export default function Registros({ sede, usuario }) {
   }));
 
   return (
-    <div>
+    <div className="mt-10 lg:mt-0">
       {Loaders ? (
         <LoaderTable />
       ) : (

@@ -12,7 +12,7 @@ export default function Header({ nombre, Toggle }) {
           <img
             src="/img/sena_google_forms_header.png"
             alt="logo"
-            className="w-50"
+            className="w-40 lg:w-50"
           />
         </a>{" "}
         <div className="lg:hidden !ml-7 outline-none">

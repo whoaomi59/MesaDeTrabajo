@@ -118,9 +118,9 @@ export default function Dashboard() {
   };
 
   return (
-    <div className="min-h-screen  from-indigo-50 via-white to-indigo-100">
-      <div className="max-w-7xl mx-auto">
-        <div className="flexx mb-5">
+    <div className="min-h-screen  from-indigo-50 via-white to-indigo-100 ">
+      <div className="max-w-7xl mx-auto ">
+        <div className="flexx mb-5 mt-10 lg:mt-0">
           <img
             src="/img/sena_google_forms_header.png"
             alt="logo"
