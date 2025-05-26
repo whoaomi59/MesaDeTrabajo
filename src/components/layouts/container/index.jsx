@@ -18,7 +18,7 @@ export default function Container({ children, nombre }) {
           <Navbar toggle={statemenu} />
           <button
             onClick={() => setstatemenu((prev) => !prev)}
-            className="lg:hidden w-8 h-8 z-[100] fixed top-[74px] left-[10px] cursor-pointer bg-[#007bff] flex items-center justify-center rounded-full outline-none transition-all duration-500"
+            className="lg:hidden w-8 h-8 z-[300] fixed top-[74px] left-[10px] cursor-pointer bg-[#007bff] flex items-center justify-center rounded-full outline-none transition-all duration-500"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"

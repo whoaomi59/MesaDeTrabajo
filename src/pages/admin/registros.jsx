@@ -1,19 +1,14 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import Grid from "../../components/grid/dataGid/grid";
 import LoaderTable from "../../components/contend/loaderTable";
-import {
-  CloudArrowDownIcon,
-  HomeModernIcon,
-  PrinterIcon,
-  UserGroupIcon,
-} from "@heroicons/react/24/outline";
+import { HomeModernIcon, UserGroupIcon } from "@heroicons/react/24/outline";
 import Header from "./components/header";
 import { ModelsRegistro } from "./models";
 import { Verdetalle } from "./fuctions";
 import { Alertas } from "../../components/contend/alert";
 import GridRegistros from "../../components/grid/dataGid/gridreg";
 import { WhatsAppLink } from "../../components/api/whassapp";
+import { Bomb, FolderSync } from "lucide-react";
 
 const axiosLocal = "http://localhost/Api_MesaServicio";
 const axiosOnline = "https://asuprocolombiasas.com/php/ApiMesaDeServicio";
@@ -23,12 +18,12 @@ const BaseURL = axiosOnline;
 export default function Registros({ sede, usuario }) {
   const [data, setData] = useState([]);
   const [dataorigin, setDataorigin] = useState([]);
-  const [isOpen, setIsOpen] = useState(false); // Estado para abrir/cerrar el modal
-  const [selectedRecord, setSelectedRecord] = useState(null); // Estado para almacenar el registro seleccionado
+  const [isOpen, setIsOpen] = useState(false);
+  const [selectedRecord, setSelectedRecord] = useState(null);
   const [Loaders, setLoaders] = useState(false);
   const [Refhres, setRefhres] = useState(false);
+  const [Error, setError] = useState(false);
 
-  //FILTROS
   const [nombreFiltro, setNombreFiltro] = useState("");
   const [sedeFiltro, setSedeFiltro] = useState("");
   const [tecnicoFiltro, settecnicoFiltro] = useState("");
@@ -44,8 +39,7 @@ export default function Registros({ sede, usuario }) {
         setDataorigin(response.data);
       } catch (error) {
         setLoaders(false);
-        const alertas = Alertas({ message: error, icon: "error" });
-        return alertas;
+        return setError(true);
       }
     };
     Get();
@@ -287,40 +281,51 @@ export default function Registros({ sede, usuario }) {
               </div>
             </div>
           </div>
-          {/* BOTONES DE FUNCIONALIDADES DE REPORTE Y MAS */}
-          {/*    <div className="flex">
-            <div />
-            <div class="flex overflow-hidden bg-white border divide-x rounded-lg rtl:flex-row-reverse dark:bg-gray-900 dark:border-gray-700 dark:divide-gray-700">
-              <button class="flex items-center px-4 py-2 text-sm font-medium text-gray-600 transition-colors duration-200 sm:text-base sm:px-6 dark:hover:bg-gray-800 dark:text-gray-300 gap-x-3 hover:bg-gray-100">
-                <CloudArrowDownIcon className="w-5 h-5 sm:w-6 sm:h-6" />
+          <div className="mb-5">
+            <button
+              type="button"
+              class="text-white bg-green-600 hover:bg-green-700  rounded-full  p-2 "
+              onClick={() => setRefhres((prev) => !prev)}
+              title="Refrescar la pagina"
+            >
+              <FolderSync className="w-6 text-white" />
+            </button>
+          </div>
 
-                <span>Download</span>
-              </button>
+          {Error ? (
+            <div class="flex w-full max-w-sm overflow-hidden bg-white rounded-lg shadow-md">
+              <div class="flex items-center justify-center w-12 bg-red-500">
+                <Bomb className="text-white" />
+              </div>
 
-              <button class="flex items-center px-4 py-2 text-sm font-medium text-gray-600 transition-colors duration-200 sm:text-base sm:px-6 dark:hover:bg-gray-800 dark:text-gray-300 gap-x-3 hover:bg-gray-100">
-                <PrinterIcon className="w-5 h-5 sm:w-6 sm:h-6" />
-                <span>Print</span>
-              </button>
+              <div class="px-4 py-2 -mx-3">
+                <div class="mx-3">
+                  <span class="font-semibold text-red-500 ">Error</span>
+                  <p class="text-sm text-gray-600">
+                    Error al cargar los datos, intente refrescando la página.
+                  </p>
+                </div>
+              </div>
             </div>
-          </div> */}
-
-          <GridRegistros
-            module={""}
-            columns={ModelsRegistro}
-            data={Formater}
-            actions={[
-              {
-                icon: "PencilSquareIcon",
-                className: "bg-green-600 text-white",
-                onClick: (record) => abrirModal(record), // Llama a la función abrirModal con el registro
-              },
-              {
-                icon: "LinkIcon",
-                className: "bg-blue-600 text-white",
-                onClick: (record) => Verdetalle(record), // Llama a la función abrirModal con el registro
-              },
-            ]}
-          />
+          ) : (
+            <GridRegistros
+              module={""}
+              columns={ModelsRegistro}
+              data={Formater}
+              actions={[
+                {
+                  icon: "PencilSquareIcon",
+                  className: "bg-green-600 text-white",
+                  onClick: (record) => abrirModal(record), // Llama a la función abrirModal con el registro
+                },
+                {
+                  icon: "LinkIcon",
+                  className: "bg-blue-600 text-white",
+                  onClick: (record) => Verdetalle(record), // Llama a la función abrirModal con el registro
+                },
+              ]}
+            />
+          )}
         </>
       )}
       {/* Modal para editar estado y comentario */}
