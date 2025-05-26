@@ -30,19 +30,23 @@ export default function Dashboard() {
   const [endDate, setEndDate] = useState(null);
 
   useEffect(() => {
-    axios
-      .get(
-        "https://asuprocolombiasas.com/php/ApiMesaDeServicio/getSolicitudes.php"
-      )
-      .then((res) => {
+    const Get = async () => {
+      try {
         setloader(true);
+        const res = await axios.get(
+          `${"https://asuprocolombiasas.com/php/ApiMesaDeServicio/getSolicitudes.php"}`
+        );
         setTickets(res.data);
         setFilteredTickets(res.data);
         calcularMetricas(res.data);
         calcularTicketsPorDia(res.data);
         setloader(false);
-      })
-      .catch((err) => console.error(err));
+      } catch (error) {
+        setLoaders(false);
+        return setError(true);
+      }
+    };
+    Get();
   }, []);
 
   // Al cambiar filtros
@@ -167,6 +171,7 @@ export default function Dashboard() {
             />
           </div>
         </div> */}
+
         <div className="grid md:grid-cols-3 gap-8 mb-12">
           <div className="bg-white shadow-lg rounded-3xl p-6 hover:shadow-indigo-300 transition-shadow">
             <div className="flex items-center mb-6">
