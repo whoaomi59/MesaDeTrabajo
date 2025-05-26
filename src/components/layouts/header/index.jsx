@@ -1,5 +1,6 @@
 import { CalendarDaysIcon, KeyIcon } from "@heroicons/react/16/solid";
 import Hora from "./Hora";
+import { Expand } from "lucide-react";
 
 /* import Reloj from "./reloj"; */
 
@@ -21,6 +22,27 @@ export default function Header({ nombre, Toggle }) {
         <div className="max-lg:hidden lg:!block max-lg:before:fixed max-lg:before:bg-black max-lg:before:opacity-50 max-lg:before:inset-0 max-lg:before:z-50">
           <div className="max-lg:fixed max-lg:bg-white max-lg:w-1/2 max-lg:min-w-[300px] max-lg:top-0 max-lg:left-0 max-lg:p-6 max-lg:h-full max-lg:shadow-md max-lg:overflow-auto z-50">
             <div className="flex items-center max-lg:flex-col-reverse max-lg:ml-auto gap-8">
+              <div>
+                <button
+                  title="Expandir pantalla"
+                  onClick={() => {
+                    if (!document.fullscreenElement) {
+                      document.documentElement
+                        .requestFullscreen()
+                        .catch((err) => {
+                          console.error(
+                            "Error al intentar pantalla completa:",
+                            err
+                          );
+                        });
+                    } else {
+                      document.exitFullscreen();
+                    }
+                  }}
+                >
+                  <Expand className="w-5 text-green-600 hover:text-green-500 hover:w-6" />
+                </button>
+              </div>
               <div className="flex items-center space-x-6 max-lg:flex-wrap">
                 <a href="/" className="flex">
                   <CalendarDaysIcon className="w-6 text-gray-400 mr-1" />
@@ -33,9 +55,9 @@ export default function Header({ nombre, Toggle }) {
 
               <div className="dropdown-menu relative flex shrink-0 group">
                 <img
-                  src="https://cdn-icons-png.flaticon.com/512/6596/6596121.png"
+                  src="https://png.pngtree.com/png-vector/20220709/ourmid/pngtree-businessman-user-avatar-wearing-suit-with-red-tie-png-image_5809521.png"
                   alt="profile-pic"
-                  className="w-9 h-9 max-lg:w-16 max-lg:h-16 rounded-full border-2 border-gray-300 cursor-pointer"
+                  className="w-10 h-10 max-lg:w-16 max-lg:h-16 rounded-full border border-gray-200 cursor-pointer"
                 />
 
                 <div className="dropdown-content hidden group-hover:block shadow-md p-2 bg-white rounded-md absolute top-9 right-0 w-56">

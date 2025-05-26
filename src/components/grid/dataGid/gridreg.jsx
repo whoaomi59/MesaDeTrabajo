@@ -125,9 +125,9 @@ const GridRegistros = ({ columns, data, actions, module, setRefhres }) => {
               key={rowIndex}
               className={`border border-green-500 rounded-lg shadow-md p-4 ${
                 row.estado === "pendiente"
-                  ? "bg-red-200"
+                  ? "bg-gray-300"
                   : row.estado === "en proceso"
-                  ? "bg-green-100"
+                  ? "bg-gray-200"
                   : ""
               }`}
             >
