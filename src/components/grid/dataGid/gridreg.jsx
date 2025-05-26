@@ -123,11 +123,11 @@ const GridRegistros = ({ columns, data, actions, module, setRefhres }) => {
           {currentData.map((row, rowIndex) => (
             <div
               key={rowIndex}
-              className={`bg-white border border-green-500 rounded-lg shadow-md p-4 ${
+              className={`border border-green-500 rounded-lg shadow-md p-4 ${
                 row.estado === "pendiente"
-                  ? "bg-gray-200"
+                  ? "bg-red-200"
                   : row.estado === "en proceso"
-                  ? "bg-gray-100"
+                  ? "bg-green-100"
                   : ""
               }`}
             >
