@@ -18,7 +18,7 @@ const GridRegistros = ({ columns, data, actions, module, setRefhres }) => {
   };
 
   return (
-    <div className="overflow-x-auto">
+    <div className="overflow-x-auto p-3">
       <div className="flex justify-between items-center mb-4">
         <h1 className="text-3xl font-extrabold text-gray-600">{module}</h1>
         <div className="flex space-x-2 items-center">
@@ -56,68 +56,75 @@ const GridRegistros = ({ columns, data, actions, module, setRefhres }) => {
       </div>
 
       {view === "table" ? (
-        <table className="min-w-full bg-white border border-gray-200">
-          <thead className="bg-green-600 text-white">
-            <tr>
-              {columns.map((col) => (
-                <th
-                  key={col.key}
-                  className="p-4 text-left text-sm font-medium hidden sm:table-cell"
-                >
-                  {col.label}
-                </th>
-              ))}
-              {actions?.length > 0 && (
-                <th className="p-4 text-left text-sm font-medium hidden sm:table-cell">
-                  Acciones
-                </th>
-              )}
-            </tr>
-          </thead>
-          <tbody>
-            {currentData.map((row, rowIndex) => (
-              <tr
-                key={rowIndex}
-                className={`cursor-pointer sm:table-row ${
-                  row.estado === "pendiente"
-                    ? "bg-gray-200"
-                    : row.estado === "en proceso"
-                    ? "bg-gray-100"
-                    : ""
-                }`}
-              >
+        <div className="w-full overflow-x-auto rounded-xl shadow-sm bg-white">
+          <table className="min-w-full divide-y divide-gray-200 table-auto">
+            <thead className="bg-green-600 text-white">
+              <tr>
                 {columns.map((col) => (
-                  <td
+                  <th
                     key={col.key}
-                    className="p-4 text-sm text-black sm:table-cell"
+                    className="px-4 py-3 text-left text-sm font-semibold hidden sm:table-cell"
                   >
-                    {row[col.key]}
-                  </td>
+                    {col.label}
+                  </th>
                 ))}
                 {actions?.length > 0 && (
-                  <td className="p-4 space-x-2 sm:table-cell">
-                    {actions.map((action, actionIndex) => {
-                      const IconComponent = Icons[action.icon];
-                      return (
-                        <button
-                          key={actionIndex}
-                          className={`p-2 rounded ${action.className} hover:bg-gray-300 m-0.5`}
-                          title={action.label}
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            action.onClick?.(row);
-                          }}
-                        >
-                          {IconComponent && <IconComponent className="w-4" />}
-                        </button>
-                      );
-                    })}
-                  </td>
+                  <th className="px-4 py-3 text-left text-sm font-semibold hidden sm:table-cell">
+                    Acciones
+                  </th>
                 )}
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody className="divide-y divide-gray-100">
+              {currentData.map((row, rowIndex) => (
+                <tr
+                  key={rowIndex}
+                  className={`transition  ${
+                    row.estado === "pendiente"
+                      ? "bg-gray-200"
+                      : row.estado === "en proceso"
+                      ? "bg-gray-200"
+                      : ""
+                  }`}
+                >
+                  {/* Para pantallas grandes */}
+                  {columns.map((col) => (
+                    <td
+                      key={col.key}
+                      className="px-4 py-3 text-sm text-gray-800 sm:table-cell"
+                    >
+                      {row[col.key]}
+                    </td>
+                  ))}
+                  {actions?.length > 0 && (
+                    <td className="px-4 py-3  sm:table-cell">
+                      <div className="flex gap-2 flex-wrap">
+                        {actions.map((action, index) => {
+                          const IconComponent = Icons[action.icon];
+                          return (
+                            <button
+                              key={index}
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                action.onClick?.(row);
+                              }}
+                              title={action.label}
+                              className={`p-2 rounded-lg hover:bg-gray-400 transition border ${action.className}`}
+                            >
+                              {IconComponent && (
+                                <IconComponent className="w-4 h-4" />
+                              )}
+                            </button>
+                          );
+                        })}
+                      </div>
+                    </td>
+                  )}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
           {currentData.map((row, rowIndex) => (
