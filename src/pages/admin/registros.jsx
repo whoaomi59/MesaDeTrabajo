@@ -321,7 +321,7 @@ export default function Registros({ sede, usuario }) {
       )}
       {/* Modal para editar estado y comentario */}
       {isOpen && (
-        <div className="fixed inset-0 bg-[#00000096] bg-opacity-50 flex justify-center items-center">
+        <div className="fixed inset-0 bg-[#00000096] bg-opacity-50 flex justify-center items-center z-200">
           <form
             onSubmit={guardarCambios}
             className="bg-white p-5 rounded-lg shadow-lg w-96"
