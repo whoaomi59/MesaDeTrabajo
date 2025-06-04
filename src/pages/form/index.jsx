@@ -89,7 +89,7 @@ export default function Formulario() {
     <>
       <div className="bg-[#E6F4EA] pt-4 pr-4 pl-4 flex justify-between items-center">
         <p className="text-gray-500">
-          Create by Jhon Mario Chilito<span className="mr-2">🔑</span>V.03
+          Create by Equipo TIC<span className="mr-2">🔑</span>V.03
         </p>
         <a
           href="/Auth"

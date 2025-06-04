@@ -44,10 +44,8 @@ export default function Header({ nombre, Toggle }) {
                 </button>
               </div>
               <div className="flex items-center space-x-6 max-lg:flex-wrap">
-                <a href="/" className="flex items-center">
-                  <Icons.RadioTower className="w-5 text-gray-500 mr-1" />
-                  <Hora />
-                </a>
+                <Icons.RadioTower className="w-5 text-gray-500 mr-1" />
+                <Hora />
               </div>
               <div className="text-gray-500 flex">
                 <KeyIcon className="w-5 mr-1" /> {nombre}
@@ -69,7 +67,6 @@ export default function Header({ nombre, Toggle }) {
                       <Icons.Cog className="mr-2 w-5" />
                       Configuraciones
                     </a>
-                    <hr className="my-2 -mx-2" />
 
                     <a
                       href="javascript:void(0)"
