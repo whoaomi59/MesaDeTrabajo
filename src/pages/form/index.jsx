@@ -2,6 +2,7 @@ import { useState } from "react";
 import axios from "axios";
 import Loader from "../../components/contend/loader";
 import Swal from "sweetalert2";
+import { Version } from "../../mock/version";
 
 const axiosLocal = "http://localhost/Api_MesaServicio";
 const axiosOnline = "https://asuprocolombiasas.com/php/ApiMesaDeServicio";
@@ -89,7 +90,8 @@ export default function Formulario() {
     <>
       <div className="bg-[#E6F4EA] pt-4 pr-4 pl-4 flex justify-between items-center">
         <p className="text-gray-500">
-          <span className="mr-2">🔑</span>V.03
+          <span className="mr-2">🔑</span>
+          {Version}
         </p>
         <a
           href="/Auth"
