@@ -17,6 +17,7 @@ import {
 } from "recharts";
 import { AlignEndHorizontal, BeakerIcon, UserRoundCog } from "lucide-react";
 import LoaderTable from "../../components/contend/loaderTable";
+import { Version } from "../../mock/version";
 
 export default function Dashboard() {
   const [tickets, setTickets] = useState([]);
@@ -139,6 +140,7 @@ export default function Dashboard() {
             className="w-120"
           />
         </div>
+        <h1 className="text-center text-gray-400">{Version}</h1>
         {/*  <div className="flex justify-center gap-6 mb-4">
           <div className="flex flex-col items-center">
             <label className="mb-2 font-semibold text-green-600">Desde</label>
