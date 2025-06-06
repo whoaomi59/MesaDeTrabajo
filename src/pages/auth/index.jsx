@@ -41,7 +41,9 @@ export default function Auth() {
         <h1 className="text-center text-3xl font-bold text-gray-700">
           Ingreso
         </h1>
-        <p className="text-gray-500">Ingreso a admin Mesa de Servicio</p>
+        <p className="text-gray-500 text-center">
+          Ingreso a admin Mesa de Servicio
+        </p>
 
         <form onSubmit={handleLogin}>
           <div className="relative mt-2 w-full">
@@ -103,7 +105,7 @@ export default function Auth() {
           <div className="flex w-full items-center mt-4">
             <button
               type="submit"
-              className="w-full rounded-lg bg-green-600 py-3 font-bold text-white"
+              className="w-full rounded-lg bg-green-500 py-3 font-bold text-white hover:bg-green-600"
             >
               Ingresar
             </button>
