@@ -17,9 +17,7 @@ export default function Navbar({ toggle }) {
         }  transition-all duration-100`}
       >
         <div>
-          <h6 className="text-[#494848] text-sm font-bold px-4">
-            General Settings
-          </h6>
+          <h6 className="text-[#494848] text-sm font-bold px-4">Acciones</h6>
           <ul className="mt-3 space-y-2">
             <li className="text-[#636363]">
               <a
@@ -52,14 +50,16 @@ export default function Navbar({ toggle }) {
         </div>
 
         <div className="mt-6">
-          <h6 className="text-[#494848] text-sm font-bold px-4">Actions</h6>
-          <ul className="mt-3 space-y-2">
-            <li>
+          <h6 className="text-[#494848] text-sm font-bold px-4">
+            Configuraciones
+          </h6>
+          <ul className="mt-2 space-y-2">
+            <li className="w-full">
               <button
                 onClick={handleLogout}
-                className="text-[#636363] text-sm flex items-center hover:bg-gray-100 rounded-md px-4 py-2 transition-all"
+                className="text-gray-400 text-sm flex items-center hover:bg-gray-100 rounded-md px-4 py-2 transition-all w-full"
               >
-                <CirclePower className="w-5 mr-2 text-red-500" />
+                <CirclePower className="w-5 mr-2" />
                 <span>Salir</span>
               </button>
             </li>
