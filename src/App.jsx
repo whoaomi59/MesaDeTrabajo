@@ -8,6 +8,7 @@ import ProtectedRoute from "./midelware/ProtectedRoute";
 import Dashboar from "./pages/admin/dashboar";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/react";
+import QR from "./pages/admin/codigoqr";
 
 function App() {
   const Seccion = JSON.parse(sessionStorage.getItem("user")) || {};
@@ -31,12 +32,13 @@ function App() {
                   <Route path="/admin" element={<Dashboar />} />
                   <Route
                     path="/admin/reg"
-                    element={<Registros sede={sede} usuario={nombre}/>}
+                    element={<Registros sede={sede} usuario={nombre} />}
                   />{" "}
                   <Route
                     path="/admin/reg/detalle/:id"
                     element={"DETALLE DE LA SOLICITUD..."}
                   />
+                  <Route path="/QR" element={<QR />} />
                 </Routes>
               </Container>
             </ProtectedRoute>

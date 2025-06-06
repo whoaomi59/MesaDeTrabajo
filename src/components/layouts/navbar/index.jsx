@@ -1,10 +1,10 @@
 import * as Icons from "@heroicons/react/24/outline";
-import { ChartPie, CirclePower, UserPen } from "lucide-react";
+import { ChartPie, CirclePower, QrCode, UserPen } from "lucide-react";
 
 export default function Navbar({ toggle }) {
   const handleLogout = () => {
     sessionStorage.removeItem("user");
-    window.location.href = "/Auth"; // Redirigir a la página de login
+    window.location.href = "/Auth";
   };
 
   return (
@@ -37,6 +37,15 @@ export default function Navbar({ toggle }) {
               >
                 <UserPen className="w-5 mr-2 text-gray-500" />
                 <span>Registros</span>
+              </a>
+            </li>
+            <li className="text-[#636363]">
+              <a
+                href="/QR"
+                className="text-sm flex items-center hover:bg-gray-100 rounded-md px-4 py-2 transition-all"
+              >
+                <QrCode className="w-5 mr-2 text-gray-500" />
+                <span>QR</span>
               </a>
             </li>
           </ul>
