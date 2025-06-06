@@ -30,13 +30,13 @@ export default function Auth() {
   return (
     <div className="flex h-screen w-screen items-center overflow-hidden px-2">
       <div className="relative flex w-96 flex-col space-y-5 rounded-lg bg-white px-5 py-10 shadow-xl sm:mx-auto">
-        <div className="flexx">
+        <a className="flexx" href="/">
           <img
             src="/img/sena_google_forms_header.png"
             alt="logo"
             className="w-40 lg:w-90"
           />
-        </div>
+        </a>
 
         <h1 className="text-center text-3xl font-bold text-gray-700">
           Ingreso
