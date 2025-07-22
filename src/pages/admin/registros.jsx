@@ -9,6 +9,7 @@ import { Alertas } from "../../components/contend/alert";
 import GridRegistros from "../../components/grid/dataGid/gridreg";
 import { WhatsAppLink } from "../../components/api/whassapp";
 import { Bomb, FolderSync, X } from "lucide-react";
+import { handleWhatsappClick } from "../../api/Whassapp";
 
 const axiosLocal = "http://localhost/Api_MesaServicio";
 const axiosOnline = "https://asuprocolombiasas.com/php/ApiMesaDeServicio";
@@ -122,8 +123,7 @@ export default function Registros({ sede, usuario }) {
     estadoFiltro,
     dataorigin,
     tecnicoFiltro,
-  ]); // 🔥 `sede` no está en la dependencia para evitar bucles infinitos
-
+  ]);
   const Formater = data.map((item) => ({
     id: item.id,
     nombre_completo: item.nombre_completo,
