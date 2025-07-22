@@ -34,7 +34,7 @@ export default function Auth() {
           <img
             src="/img/sena_google_forms_header.png"
             alt="logo"
-            className="w-40 lg:w-90"
+            className="w-90 lg:w-90"
           />
         </a>
 
@@ -42,7 +42,7 @@ export default function Auth() {
           Ingreso
         </h1>
         <p className="text-gray-500 text-center">
-          Ingreso a admin Mesa de Servicio
+          Ingreso a Panel, Mesa de Servicio
         </p>
 
         <form onSubmit={handleLogin}>
