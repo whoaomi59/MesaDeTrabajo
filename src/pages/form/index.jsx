@@ -3,6 +3,7 @@ import axios from "axios";
 import Loader from "../../components/contend/loader";
 import Swal from "sweetalert2";
 import { Version } from "../../mock/version";
+import { handleWhatsappClick } from "../../api/Whassapp";
 
 const axiosLocal = "http://localhost/Api_MesaServicio";
 const axiosOnline = "https://asuprocolombiasas.com/php/ApiMesaDeServicio";
@@ -20,6 +21,9 @@ export default function Formulario() {
     descripcion: "",
     Tecnico_asignado: "",
   });
+
+  const textos = "Hola, Admin. ¿Podría ayudarme con mi formulario?";
+  const Info = "3144160224";
 
   const [Loaders, setLoaders] = useState(false);
 
@@ -215,6 +219,13 @@ export default function Formulario() {
             </button>
           </form>
         </div>
+        <button onClick={() => handleWhatsappClick(textos, Info)}>
+          <img
+            src="./img/SVG/ico-whattsapp.png"
+            alt="ico"
+            className="ico-whattsapp"
+          />
+        </button>
       </div>
     </>
   );

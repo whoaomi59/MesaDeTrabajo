@@ -3,3 +3,17 @@
     align-items: center;
     justify-content: center;
 }
+
+.ico-whattsapp{
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    padding: 5px;
+    margin: 5px;
+    width: 60px;
+    transition: 1s;
+}
+
+.ico-whattsapp:hover{
+    width: 70px;
+}

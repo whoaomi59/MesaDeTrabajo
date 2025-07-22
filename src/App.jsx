@@ -16,8 +16,6 @@ function App() {
   let usuario = Seccion.user;
   let sede = Seccion.sede;
 
-  console.log(Seccion.sede);
-
   return (
     <Router>
       <Analytics />
