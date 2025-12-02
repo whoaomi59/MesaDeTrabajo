@@ -5,19 +5,20 @@
 }
 
 .ico-whattsapp {
-  position: absolute;
-  bottom: 0;
-  right: 0;
+  position: fixed; /* mejor que absolute en iconos flotantes */
+  bottom: 10px;
+  right: 10px;
   padding: 5px;
-  margin: 5px;
   width: 60px;
-  transition: 1s;
+  transition: 0.3s;
+  z-index: 9999;
 }
 
 .ico-whattsapp:hover {
   width: 70px;
 }
-/* FLOTAR LOGO */
+
+/* Animación */
 .float-animation {
   animation: flotar 3s ease-in-out infinite, brillo 2.5s ease-in-out infinite;
 }
@@ -25,10 +26,10 @@
 @keyframes flotar {
   0%,
   100% {
-    transform: translateY(0);
+    transform: scale(1);
   }
   50% {
-    transform: translateY(-10px);
+    transform: scale(1.05);
   }
 }
 
