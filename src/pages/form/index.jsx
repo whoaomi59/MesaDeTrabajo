@@ -223,7 +223,7 @@ export default function Formulario() {
           <img
             src="./img/SVG/ico-whattsapp.png"
             alt="ico"
-            className="ico-whattsapp"
+            className="ico-whattsapp float-animation"
           />
         </button>
       </div>

@@ -1,19 +1,43 @@
-.flexx{
-    display: flex;
-    align-items: center;
-    justify-content: center;
+.flexx {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.ico-whattsapp{
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    padding: 5px;
-    margin: 5px;
-    width: 60px;
-    transition: 1s;
+.ico-whattsapp {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  padding: 5px;
+  margin: 5px;
+  width: 60px;
+  transition: 1s;
 }
 
-.ico-whattsapp:hover{
-    width: 70px;
+.ico-whattsapp:hover {
+  width: 70px;
+}
+/* FLOTAR LOGO */
+.float-animation {
+  animation: flotar 3s ease-in-out infinite, brillo 2.5s ease-in-out infinite;
+}
+
+@keyframes flotar {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes brillo {
+  0%,
+  100% {
+    filter: drop-shadow(0 0 0px #20c063);
+  }
+  50% {
+    filter: drop-shadow(0 0 8px #20c063);
+  }
 }
