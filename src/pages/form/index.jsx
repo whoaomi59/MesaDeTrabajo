@@ -101,7 +101,7 @@ export default function Formulario() {
           href="/Auth"
           className="text-green-700 font-semibold hover:underline"
         >
-          Ingresar
+          🔐 Ingresar
         </a>
       </div>
 
