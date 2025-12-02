@@ -374,7 +374,7 @@ export default function Registros({ sede, usuario }) {
         <div className="fixed inset-0 bg-[#00000096] bg-opacity-50 flex justify-center items-center z-300">
           <form
             onSubmit={guardarCambios}
-            className="bg-white p-5 rounded-lg shadow-lg w-96"
+            className="bg-white p-5 rounded-lg shadow-lg w-96 max-h-[90vh] overflow-y-auto"
           >
             <button type="button" onClick={cerrarModal} title="Cerrar">
               <X className="w-5 h-5" />
