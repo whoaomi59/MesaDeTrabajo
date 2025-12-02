@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import axios from "axios";
 import LoaderTable from "../../components/contend/loaderTable";
 import { HomeModernIcon, UserGroupIcon } from "@heroicons/react/24/outline";
@@ -8,8 +8,14 @@ import { Verdetalle } from "./fuctions";
 import { Alertas } from "../../components/contend/alert";
 import GridRegistros from "../../components/grid/dataGid/gridreg";
 import { WhatsAppLink } from "../../components/api/whassapp";
-import { Bomb, FolderSync, X } from "lucide-react";
-import { handleWhatsappClick } from "../../api/Whassapp";
+import {
+  Bomb,
+  Camera,
+  CircleDot,
+  FileImage,
+  FolderSync,
+  X,
+} from "lucide-react";
 
 const axiosLocal = "http://localhost/Api_MesaServicio";
 const axiosOnline = "https://asuprocolombiasas.com/php/ApiMesaDeServicio";
@@ -30,6 +36,12 @@ export default function Registros({ sede, usuario }) {
   const [tecnicoFiltro, settecnicoFiltro] = useState("");
   const [fechaFiltro, setFechaFiltro] = useState("");
   const [estadoFiltro, setEstadoFiltro] = useState("");
+
+  //TOMAR FOTOS Y SUBIR IMAGENES
+  const videoRef = useRef(null);
+  const canvasRef = useRef(null);
+  const [foto, setFoto] = useState(null);
+  const [isOpenS, setIsOpenS] = useState(false); // Para abrir la cámara
 
   useEffect(() => {
     const Get = async () => {
@@ -58,6 +70,41 @@ export default function Registros({ sede, usuario }) {
     setIsOpen(false);
     setSelectedRecord(null);
   };
+  //Tomar Fotos
+  const abrirCamara = async () => {
+    setIsOpenS(true);
+    try {
+      const stream = await navigator.mediaDevices.getUserMedia({
+        video: { facingMode: "environment" }, // cámara trasera en móviles
+        audio: false,
+      });
+      videoRef.current.srcObject = stream;
+      videoRef.current.play();
+    } catch (error) {
+      console.error("Error al abrir la cámara:", error);
+      alert("No se pudo acceder a la cámara.");
+    }
+  };
+
+  const tomarFoto = () => {
+    const context = canvasRef.current.getContext("2d");
+    context.drawImage(videoRef.current, 0, 0, 400, 300);
+
+    const imageData = canvasRef.current.toDataURL("image/png");
+    setFoto(imageData);
+
+    // Detener la cámara después de tomar la foto
+    const stream = videoRef.current.srcObject;
+    const tracks = stream.getTracks();
+    tracks.forEach((track) => track.stop());
+    setIsOpenS(false);
+  };
+
+  //Subir Imagenes
+  const subirImagen = (e) => {
+    e.preventDefault();
+    alert("Función para subir imagenes en desarrollo");
+  };
 
   // Función para manejar cambios en los inputs del modal
   const handleChange = (e) => {
@@ -73,6 +120,7 @@ export default function Registros({ sede, usuario }) {
         estado: selectedRecord.estado,
         Tecnico_asignado: selectedRecord.Tecnico_asignado,
         comentario_solucion: selectedRecord.comentario_solucion,
+        evidencia: foto,
       });
 
       setRefhres((prev) => !prev);
@@ -167,6 +215,8 @@ export default function Registros({ sede, usuario }) {
     comentario_solucion: item.comentario_solucion,
     Fecha_Solucion: item.Fecha_Solucion,
   }));
+
+  console.log(foto);
 
   return (
     <div className="mt-10 lg:mt-0">
@@ -329,7 +379,6 @@ export default function Registros({ sede, usuario }) {
             <button type="button" onClick={cerrarModal} title="Cerrar">
               <X className="w-5 h-5" />
             </button>
-
             <h2 className="text-xl font-bold mb-4">Editar Solicitud</h2>
             <label className="block mb-2">Estado:</label>
             <select
@@ -393,6 +442,55 @@ export default function Registros({ sede, usuario }) {
               className="bg-gray-100 w-full text-gray-800 text-sm px-4 py-3 rounded focus:bg-transparent outline-blue-500 transition-all"
               required
             />
+            <label className="block mt-4 mb-2">Evidencia:</label>
+            <div className="flex">
+              <button
+                title="Abrir Cámara"
+                type="button"
+                onClick={abrirCamara}
+                className="mr-1 bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition-colors"
+              >
+                <Camera />
+              </button>
+              {/*   <button
+                onClick={subirImagen}
+                className="mr-1 bg-orange-600 text-white px-4 py-2 rounded hover:bg-orange-700 transition-colors"
+              >
+                <FileImage />
+              </button> */}
+            </div>{" "}
+            {isOpenS && (
+              <div className="mt-4">
+                <video ref={videoRef} width="400" height="300" autoPlay></video>
+                <div className="flexx">
+                  <button
+                    title="Tomar Foto"
+                    onClick={tomarFoto}
+                    className="bg-red-600 text-white px-4 py-2 rounded mt-2 hover:bg-red-700 transition-colors"
+                  >
+                    <CircleDot />
+                  </button>
+                </div>
+              </div>
+            )}{" "}
+            {/* Canvas oculto */}
+            <canvas
+              ref={canvasRef}
+              width="400"
+              height="300"
+              style={{ display: "none" }}
+            ></canvas>
+            {/* Vista previa de la foto */}
+            {foto && (
+              <div className="mt-4">
+                <h3>Foto capturada:</h3>
+                <img
+                  src={foto}
+                  alt="evidencia"
+                  className="border-none rounded"
+                />
+              </div>
+            )}
             <div className="flex justify-end gap-2 mt-4">
               <button
                 type="button"
