@@ -442,7 +442,7 @@ export default function Registros({ sede, usuario }) {
               className="bg-gray-100 w-full text-gray-800 text-sm px-4 py-3 rounded focus:bg-transparent outline-blue-500 transition-all"
               required
             />
-            <label className="block mt-4 mb-2">Evidencia:</label>
+          {/*   <label className="block mt-4 mb-2">Evidencia:</label>
             <div className="flex">
               <button
                 title="Abrir Cámara"
@@ -451,7 +451,7 @@ export default function Registros({ sede, usuario }) {
                 className="mr-1 bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition-colors"
               >
                 <Camera />
-              </button>
+              </button> */}
               {/*   <button
                 onClick={subirImagen}
                 className="mr-1 bg-orange-600 text-white px-4 py-2 rounded hover:bg-orange-700 transition-colors"
