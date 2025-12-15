@@ -374,12 +374,12 @@ export default function Registros({ sede, usuario }) {
         <div className="fixed inset-0 bg-[#00000096] bg-opacity-50 flex justify-center items-center z-300">
           <form
             onSubmit={guardarCambios}
-            className="bg-white p-5 rounded-lg shadow-lg w-96 max-h-[90vh] overflow-y-auto"
+            className="bg-white p-5 rounded-lg shadow-lg w-120 max-h-[90vh] overflow-y-auto"
           >
             <button type="button" onClick={cerrarModal} title="Cerrar">
               <X className="w-5 h-5" />
             </button>
-            <h2 className="text-xl font-bold mb-4">Editar Solicitud</h2>
+            <h2 className="text-xl font-bold mb-4">✏️ Editar Solicitud</h2>
             <label className="block mb-2">Estado:</label>
             <select
               name="estado"
@@ -442,16 +442,16 @@ export default function Registros({ sede, usuario }) {
               className="bg-gray-100 w-full text-gray-800 text-sm px-4 py-3 rounded focus:bg-transparent outline-blue-500 transition-all"
               required
             />
-            {/*   <label className="block mt-4 mb-2">Evidencia:</label> */}
+            <label className="block mt-4 mb-2">Evidencia:</label>
             <div className="flex">
-              {/*     <button
+              <button
                 title="Abrir Cámara"
                 type="button"
                 onClick={abrirCamara}
                 className="mr-1 bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition-colors"
               >
                 <Camera />
-              </button> */}
+              </button>
               {/*   <button
                 onClick={subirImagen}
                 className="mr-1 bg-orange-600 text-white px-4 py-2 rounded hover:bg-orange-700 transition-colors"
