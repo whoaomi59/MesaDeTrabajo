@@ -1,0 +1,10 @@
+[15-Dec-2025 19:28:37 UTC] PHP Fatal error:  Uncaught mysqli_sql_exception: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'Fecha_Solucion = NOW() WHERE id = ?' at line 1 in /home/sisottsa/public_html/php/ApiMesaDeServicio/updateSolicitud.php:25
+Stack trace:
+#0 /home/sisottsa/public_html/php/ApiMesaDeServicio/updateSolicitud.php(25): mysqli->prepare('UPDATE solicitu...')
+#1 {main}
+  thrown in /home/sisottsa/public_html/php/ApiMesaDeServicio/updateSolicitud.php on line 25
+[15-Dec-2025 19:30:07 UTC] PHP Fatal error:  Uncaught ArgumentCountError: The number of elements in the type definition string must match the number of bind variables in /home/sisottsa/public_html/php/ApiMesaDeServicio/updateSolicitud.php:26
+Stack trace:
+#0 /home/sisottsa/public_html/php/ApiMesaDeServicio/updateSolicitud.php(26): mysqli_stmt->bind_param('ssssi', 'resuelto', 'Se configura re...', 'Marcos Ramos', 256)
+#1 {main}
+  thrown in /home/sisottsa/public_html/php/ApiMesaDeServicio/updateSolicitud.php on line 26
