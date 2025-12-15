@@ -16,11 +16,7 @@ import {
   FolderSync,
   X,
 } from "lucide-react";
-
-const axiosLocal = "http://localhost/Api_MesaServicio";
-const axiosOnline = "https://asuprocolombiasas.com/php/ApiMesaDeServicio";
-
-const BaseURL = axiosOnline;
+import { URL } from "../../mock/url";
 
 export default function Registros({ sede, usuario }) {
   const [data, setData] = useState([]);
@@ -47,7 +43,7 @@ export default function Registros({ sede, usuario }) {
     const Get = async () => {
       try {
         setLoaders(true);
-        const response = await axios.get(`${BaseURL + "/getSolicitudes.php"}`);
+        const response = await axios.get(`${URL + "/getSolicitudes.php"}`);
         setLoaders(false);
         setDataorigin(response.data);
       } catch (error) {
@@ -115,7 +111,7 @@ export default function Registros({ sede, usuario }) {
   const guardarCambios = async (e) => {
     e.preventDefault();
     try {
-      await axios.put(`${BaseURL + "/updateSolicitud.php"}`, {
+      await axios.put(`${URL + "/updateSolicitud.php"}`, {
         id: selectedRecord.id,
         estado: selectedRecord.estado,
         Tecnico_asignado: selectedRecord.Tecnico_asignado,
@@ -356,12 +352,12 @@ export default function Registros({ sede, usuario }) {
               actions={[
                 {
                   icon: "PencilSquareIcon",
-                  className: "bg-green-600 text-white",
+                  className: "bg-green-500 text-white",
                   onClick: (record) => abrirModal(record), // Llama a la función abrirModal con el registro
                 },
                 {
                   icon: "LinkIcon",
-                  className: "bg-blue-600 text-white",
+                  className: "bg-blue-500 text-white",
                   onClick: (record) => Verdetalle(record), // Llama a la función abrirModal con el registro
                 },
               ]}

@@ -9,6 +9,7 @@ import Dashboar from "./pages/admin/dashboar";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/react";
 import QR from "./pages/admin/codigoqr";
+import Detalle from "./pages/admin/detalle";
 
 function App() {
   const Seccion = JSON.parse(sessionStorage.getItem("user")) || {};
@@ -32,10 +33,7 @@ function App() {
                     path="/admin/reg"
                     element={<Registros sede={sede} usuario={nombre} />}
                   />{" "}
-                  <Route
-                    path="/admin/reg/detalle/:id"
-                    element={"DETALLE DE LA SOLICITUD..."}
-                  />
+                  <Route path="/admin/reg/detalle/:id" element={<Detalle />} />
                   <Route path="/QR" element={<QR />} />
                 </Routes>
               </Container>
