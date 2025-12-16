@@ -17,7 +17,7 @@ import {
   X,
 } from "lucide-react";
 import { URL } from "../../mock/url";
-import Evidencias from "./components/evidencias";
+import Error500 from "./components/500";
 
 export default function Registros({ sede, usuario }) {
   const [data, setData] = useState([]);
@@ -181,6 +181,7 @@ export default function Registros({ sede, usuario }) {
     dataorigin,
     tecnicoFiltro,
   ]);
+
   const Formater = data.map((item) => ({
     id: item.id,
     nombre_completo: item.nombre_completo,
@@ -247,7 +248,7 @@ export default function Registros({ sede, usuario }) {
                       <input
                         type="text"
                         id="name"
-                        placeholder="eje:Juan Carlos..."
+                        placeholder="eje: Carlos Marin..."
                         className="bg-gray-100 w-full text-gray-800 text-sm px-4 py-3 rounded focus:bg-transparent outline-blue-500 transition-all"
                         value={nombreFiltro}
                         onChange={(e) => setNombreFiltro(e.target.value)}
@@ -340,19 +341,25 @@ export default function Registros({ sede, usuario }) {
           </div>
 
           {Error ? (
-            <div class="flex w-full max-w-sm overflow-hidden bg-white rounded-lg shadow-md">
-              <div class="flex items-center justify-center w-12 bg-red-500">
-                <Bomb className="text-white" />
-              </div>
+            <div>
+              <div className="fixed top-4 left-0 w-full px-4 z-200">
+                <div className="w-full flex items-start gap-4 p-4 bg-red-50 border border-red-200 rounded-xl shadow-md animate-fade-in">
+                  <div className="flex items-center justify-center w-10 h-10 rounded-full bg-red-500 flex-shrink-0">
+                    <Bomb className="text-white w-5 h-5" />
+                  </div>
 
-              <div class="px-4 py-2 -mx-3">
-                <div class="mx-3">
-                  <span class="font-semibold text-red-500 ">Error</span>
-                  <p class="text-sm text-gray-600">
-                    Error al cargar los datos, intente refrescando la página.
-                  </p>
+                  <div className="flex-1">
+                    <h4 className="text-sm font-semibold text-red-700">
+                      Ocurrió un error
+                    </h4>
+                    <p className="mt-1 text-sm text-red-600 leading-relaxed">
+                      No fue posible cargar los datos. Por favor, intente
+                      refrescar la página.
+                    </p>
+                  </div>
                 </div>
               </div>
+              <Error500 />
             </div>
           ) : (
             <GridRegistros
