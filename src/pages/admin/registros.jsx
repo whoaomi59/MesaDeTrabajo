@@ -17,6 +17,7 @@ import {
   X,
 } from "lucide-react";
 import { URL } from "../../mock/url";
+import Evidencias from "./components/evidencias";
 
 export default function Registros({ sede, usuario }) {
   const [data, setData] = useState([]);
@@ -38,6 +39,8 @@ export default function Registros({ sede, usuario }) {
   const canvasRef = useRef(null);
   const [foto, setFoto] = useState(null);
   const [isOpenS, setIsOpenS] = useState(false); // Para abrir la cámara
+  const [imagenSubida, setImagenSubida] = useState(null); // Para la imagen subida
+  const fileInputRef = useRef(null);
 
   useEffect(() => {
     const Get = async () => {
@@ -97,9 +100,19 @@ export default function Registros({ sede, usuario }) {
   };
 
   //Subir Imagenes
-  const subirImagen = (e) => {
-    e.preventDefault();
-    alert("Función para subir imagenes en desarrollo");
+  const abrirSelectorImagen = () => {
+    fileInputRef.current.click();
+  };
+
+  const manejarImagenSubida = (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onloadend = () => {
+      setFoto(reader.result); // Base64
+    };
+    reader.readAsDataURL(file);
   };
 
   // Función para manejar cambios en los inputs del modal
@@ -211,8 +224,6 @@ export default function Registros({ sede, usuario }) {
     comentario_solucion: item.comentario_solucion,
     Fecha_Solucion: item.Fecha_Solucion,
   }));
-
-  console.log(foto);
 
   return (
     <div className="mt-10 lg:mt-0">
@@ -451,7 +462,6 @@ export default function Registros({ sede, usuario }) {
               </div>
             ) : (
               <div>
-                {" "}
                 <div className="flex">
                   <button
                     title="Abrir Cámara"
@@ -461,13 +471,23 @@ export default function Registros({ sede, usuario }) {
                   >
                     <Camera />
                   </button>
-                  {/*   <button
-                onClick={subirImagen}
-                className="mr-1 bg-orange-600 text-white px-4 py-2 rounded hover:bg-orange-700 transition-colors"
-              >
-                <FileImage />
-              </button> */}
-                </div>{" "}
+                  <button
+                    title="Cargar Evidencia"
+                    type="button"
+                    onClick={abrirSelectorImagen}
+                    className="mr-1 bg-orange-600 text-white px-4 py-2 rounded hover:bg-orange-700 transition-colors"
+                  >
+                    <FileImage />
+                  </button>
+
+                  <input
+                    type="file"
+                    accept="image/*"
+                    ref={fileInputRef}
+                    onChange={manejarImagenSubida}
+                    style={{ display: "none" }}
+                  />
+                </div>
                 {isOpenS && (
                   <div className="mt-4">
                     <video
@@ -493,6 +513,7 @@ export default function Registros({ sede, usuario }) {
                   height="300"
                   style={{ display: "none" }}
                 ></canvas>
+                {/* <pre>{JSON.stringify(foto, null, 2)}</pre> */}
                 {foto && (
                   <div className="mt-4">
                     <h3>Foto capturada:</h3>
