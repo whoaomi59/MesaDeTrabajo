@@ -467,7 +467,7 @@ export default function Registros({ sede, usuario }) {
                     title="Abrir Cámara"
                     type="button"
                     onClick={abrirCamara}
-                    className="mr-1 bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition-colors"
+                    className="mr-1 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700 transition-colors"
                   >
                     <Camera />
                   </button>
@@ -475,7 +475,7 @@ export default function Registros({ sede, usuario }) {
                     title="Cargar Evidencia"
                     type="button"
                     onClick={abrirSelectorImagen}
-                    className="mr-1 bg-orange-600 text-white px-4 py-2 rounded hover:bg-orange-700 transition-colors"
+                    className="mr-1 bg-orange-500 text-white px-4 py-2 rounded hover:bg-orange-700 transition-colors"
                   >
                     <FileImage />
                   </button>
